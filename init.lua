@@ -21,12 +21,14 @@ vim.opt.expandtab = true
 
 --ESC mapping
 vim.keymap.set({'i', 'v', 'c'}, 'jk', '<ESC>')
+--clear register
+vim.cmd("let @h=''")
 
 --C++ only mappings
 function CppMappings(args)
     --add a nice header surrounded with /** ... **/
     vim.cmd("let @h='o/70a*a/o/70a*a/O/*68a a*/68hR'")
-    vim.keymap.set('n', ' h', 'yiwO<ESC>@h<C-r>0<ESC>', {desc="Insert /**...**/ header block", buffer= args.buf})
+    vim.keymap.set('n', '<Space>h', 'yiwO<ESC>@h<C-r>0<ESC>', {desc="Insert /**...**/ header block", buffer= args.buf})
 
     --C++ related stuff
     vim.keymap.set('n', ' sc'  , 'astatic_cast<><ESC>', {desc="adds static_cast<>", buffer= args.buf})
@@ -41,7 +43,7 @@ function CppMappings(args)
     vim.keymap.set('n', ' i', 'mi?::.*(<CR>2lyt(\'ipbiBaseClass::<ESC>ea();<ESC>==$hi', {desc="inserts 'BaseClass::<current method name>'", buffer= args.buf})
 end
 
-vim.api.nvim_create_autocmd("FileType", { pattern={"*.c", "*.h", "*.cpp", "*.hpp"}, callback = CppMappings })
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, { pattern={"*.c", "*.h", "*.cpp", "*.hpp"}, callback=CppMappings })
 
 --replace-operations
 vim.keymap.set('n', ' p' ,  'ci(<C-r>0<ESC>', {desc="Replace current content within () with previously copied content"})--inside parentheses ()
