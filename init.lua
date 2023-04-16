@@ -22,10 +22,26 @@ vim.opt.expandtab = true
 --ESC mapping
 vim.keymap.set({'i', 'v', 'c'}, 'jk', '<ESC>')
 
---add a nice header surrounded with /** ... **/
-vim.cmd("let @h='o/70a*a/o/70a*a/O/*68a a*/68hR'")
-vim.keymap.set('n', ' h', 'yiwO<ESC>@h<C-r>0<ESC>', {desc="Insert /**...**/ header block"})
+--C++ only mappings
+function CppMappings(args)
+    --add a nice header surrounded with /** ... **/
+    vim.cmd("let @h='o/70a*a/o/70a*a/O/*68a a*/68hR'")
+    vim.keymap.set('n', ' h', 'yiwO<ESC>@h<C-r>0<ESC>', {desc="Insert /**...**/ header block", buffer= args.buf})
 
+    --C++ related stuff
+    vim.keymap.set('n', ' sc'  , 'astatic_cast<><ESC>', {desc="adds static_cast<>", buffer= args.buf})
+    vim.keymap.set('n', ' dc'  , 'adynamic_cast<><ESC>', {desc="adds dynamic_cast<>", buffer= args.buf})
+    vim.keymap.set('n', ' rc'  , 'areinterpret_cast<><ESC>', {desc="adds reinterpret_cast<>", buffer= args.buf})
+    vim.keymap.set('n', ' v'   , 'ivirtual <ESC>', {desc="inserts 'virtual'", buffer= args.buf})
+    vim.keymap.set('n', ' o'   , 'aoverride<ESC>', {desc="appends 'override'", buffer= args.buf})
+    vim.keymap.set('n', ' ibc' , 'iBaseClass::', {desc="inserts 'BaseClass::'", buffer= args.buf})
+    vim.keymap.set('n', ' abc' , 'aBaseClass::', {desc="appends 'BaseClass::'", buffer= args.buf})
+
+    --BaseClass::<MethodName>()
+    vim.keymap.set('n', ' i', 'mi?::.*(<CR>2lyt(\'ipbiBaseClass::<ESC>ea();<ESC>==$hi', {desc="inserts 'BaseClass::<current method name>'", buffer= args.buf})
+end
+
+vim.api.nvim_create_autocmd("FileType", { pattern={"*.c", "*.h", "*.cpp", "*.hpp"}, callback = CppMappings })
 
 --replace-operations
 vim.keymap.set('n', ' p' ,  'ci(<C-r>0<ESC>', {desc="Replace current content within () with previously copied content"})--inside parentheses ()
@@ -33,18 +49,6 @@ vim.keymap.set('n', ' b' ,  'ci{<C-r>0<ESC>', {desc="Replace current content wit
 vim.keymap.set('n', ' w' ,  'ciw<C-r>0<ESC>', {desc="Replace current content within current word with previously copied content"})--inside word
 vim.keymap.set('n', ' W' ,  'ciW<C-r>0<ESC>', {desc="Replace current content within current Word with previously copied content"})--inside Word
 
-
---C++ related stuff
-vim.keymap.set('n', ' sc'  , 'astatic_cast<><ESC>', {desc="adds static_cast<>"})
-vim.keymap.set('n', ' dc'  , 'adynamic_cast<><ESC>', {desc="adds dynamic_cast<>"})
-vim.keymap.set('n', ' rc'  , 'areinterpret_cast<><ESC>', {desc="adds reinterpret_cast<>"})
-vim.keymap.set('n', ' v'   , 'ivirtual <ESC>', {desc="inserts 'virtual'"})
-vim.keymap.set('n', ' o'   , 'aoverride<ESC>', {desc="appends 'override'"})
-vim.keymap.set('n', ' ibc' , 'iBaseClass::', {desc="inserts 'BaseClass::'"})
-vim.keymap.set('n', ' abc' , 'aBaseClass::', {desc="appends 'BaseClass::'"})
-
---BaseClass::<MethodName>()
-vim.keymap.set('n', ' i', 'mi?::.*(<CR>2lyt(\'ipbiBaseClass::<ESC>ea();<ESC>==$hi', {desc="inserts 'BaseClass::<current method name>'"})
 
 --<Space>xc to comment current xml line out
 vim.keymap.set('n', ' xc', 'I<!--<ESC>A--><ESC>', {desc="inserts <!-- -->"})
