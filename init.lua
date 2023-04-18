@@ -40,7 +40,7 @@ vim.keymap.set('n', 'gz', '?/\\(\\([A-Z0-9]\\)\\@<![A-Z0-9]\\|\\(\\?<![a-zA-Z0-9
 --(first looking for the end and then searching for the start)
 --vim.keymap.set('o', 'x', ':<c-u>execute "normal! /\\\\C\\\\v[a-z]([a-z])@!\\r:nohlsearch\\r?\\\\v([A-Z0-9])@<![A-Z0-9]\\\\|([a-zA-Z0-9])@<![a-zA-Z0-9]\\r:nohlsearch\\rv``"<cr>')
 --vim.keymap.set('o', 'x', [[:<c-u>execute "normal! /\\C\\v[a-z]([a-z])@!\r:nohlsearch\r?\\v([A-Z0-9])@<![A-Z0-9]\\|([a-zA-Z0-9])@<![a-zA-Z0-9]\r:nohlsearch\rv``"<cr>]])
-vim.cmd([[ omap x :<c-u>execute "normal! /\\C\\v[a-z]([a-z])@!\r:nohlsearch\r?\\v([A-Z0-9])@<![A-Z0-9]\\|([a-zA-Z0-9])@<![a-zA-Z0-9]\r:nohlsearch\rv``"<cr> ]])
+vim.cmd([[omap x :<c-u>execute "normal! /\\C\\v[a-z]([a-z])@!\r:nohlsearch\r?\\v([A-Z0-9])@<![A-Z0-9]\\|([a-zA-Z0-9])@<![a-zA-Z0-9]\r:nohlsearch\rv``"<cr>]])
 --this version firt finds start and then searches for the end
 --omap x :<c-u>execute 'normal! ?\\v([A-Z0-9])@<![A-Z0-9]\\|([a-zA-Z0-9])@<![a-zA-Z0-9]\r:nohlsearch\r/\\C\\v[a-z]([a-z])@!\r:nohlsearch\rv``'<cr>
 --CamelCaseTest
