@@ -14,9 +14,13 @@ vim.keymap.set('n', 'gtT' ,  ':tabnew<cr>', {desc="create new tab"})
 vim.keymap.set('n', 'gtc' ,  ':tabclose<cr>', {desc="close current tab"})
 vim.keymap.set('n', 'gto' ,  ':tabonly<cr>', {desc="close all other tabs"})
 
+--system clipboard mappings
+vim.keymap.set({'n', 'v'}, '<leader>y' ,  '"+y', {desc="copy to system clipboard"})
+vim.keymap.set({'n', 'v'}, '<leader>p' ,  '"+p', {desc="paste from system clipboard"})
+
 
 --replace-operations
-vim.keymap.set('n', '<leader>p' ,  'ci(<C-r>0<ESC>', {desc="Replace current content within () with previously copied content"})--inside parentheses ()
+--vim.keymap.set('n', '<leader>p' ,  'ci(<C-r>0<ESC>', {desc="Replace current content within () with previously copied content"})--inside parentheses ()
 vim.keymap.set('n', '<leader>b' ,  'ci{<C-r>0<ESC>', {desc="Replace current content within {} with previously copied content"})--inside brackets {}
 vim.keymap.set('n', '<leader>w' ,  'ciw<C-r>0<ESC>', {desc="Replace current content within current word with previously copied content"})--inside word
 vim.keymap.set('n', '<leader>W' ,  'ciW<C-r>0<ESC>', {desc="Replace current content within current Word with previously copied content"})--inside Word

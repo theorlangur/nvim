@@ -7,6 +7,7 @@ vim.opt.relativenumber = true
 vim.opt.incsearch = true
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
+vim.opt.clipboard = 'unnamedplus'
 
 --timeouts
 vim.opt.timeout = true
