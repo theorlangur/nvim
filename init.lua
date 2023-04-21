@@ -19,6 +19,8 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 
+vim.g.mapleader = " "
+
 --ESC mapping
 vim.keymap.set({'i', 'v', 'c'}, 'jk', '<ESC>')
 
@@ -53,3 +55,28 @@ vim.keymap.set('n', ' u', 'gUiw', {desc="makes current word upper-case"})
 vim.keymap.set('v', ' ob', ':!format-columns.exe -sep ",}" -ignore "//"<cr>')
 --format in columns for () blocks (for functions/methods)
 vim.keymap.set('v', ' of', ':!format-columns.exe -sep ",)" -ignore "//" -depthcfg "(1"<cr>')
+
+--Lazy plugin manager
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup(
+{
+    { 'm00qek/baleia.nvim', tag = 'v1.3.0' }
+}
+)
+
+vim.cmd([[
+let s:baleia = luaeval("require('baleia').setup {}")
+command! BaleiaColorize call s:baleia.once(bufnr('%'))
+]])
