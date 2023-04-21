@@ -78,5 +78,5 @@ require("lazy").setup(
 
 vim.cmd([[
 let s:baleia = luaeval("require('baleia').setup {}")
-command! BaleiaColorize call s:baleia.once(bufnr('%'))
+command! AnsiColors call s:baleia.once(bufnr('%'))
 ]])
