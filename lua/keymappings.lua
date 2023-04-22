@@ -36,6 +36,7 @@ vim.cmd([[omap x :<c-u>execute "normal! /\\C\\v[a-z]([a-z])@!\r:nohlsearch\r?\\v
 
 --make current inner word upper case
 vim.keymap.set('n', '<leader>u', 'gUiw', {desc="makes current word upper-case"})
+vim.keymap.set('n', '<leader>l', 'guiw', {desc="makes current word lower-case"})
 
 --apply format-columns onto the selection
 --format in columns for {} blocks (for enums usually)
