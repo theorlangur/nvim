@@ -1,12 +1,4 @@
---ESC mapping
-vim.keymap.set({'i', 'v', 'c'}, 'jk', '<ESC>')
-
---Window management
-vim.keymap.set('n', '<A-h>' ,  '<C-w><', {desc="reduce window width"})
-vim.keymap.set('n', '<A-l>' ,  '<C-w>>', {desc="increase window width"})
-vim.keymap.set('n', '<A-j>' ,  '<C-w>+', {desc="increase window height"})
-vim.keymap.set('n', '<A-k>' ,  '<C-w>-', {desc="reduce window height"})
-
+--Below is unused stuff
 --Tab management
 vim.keymap.set('n', 'gtn' ,  ':tabnext<cr>', {desc="go to next tab"})
 vim.keymap.set('n', 'gtp' ,  ':tabprev<cr>', {desc="go to prev tab"})
@@ -33,10 +25,6 @@ vim.keymap.set('n', 'gz', '?/\\(\\([A-Z0-9]\\)\\@<![A-Z0-9]\\|\\(\\?<![a-zA-Z0-9
 --vim magic to work on camel-case parts of the word without additional plugins
 --(first looking for the end and then searching for the start)
 vim.cmd([[omap x :<c-u>execute "normal! /\\C\\v[a-z]([a-z])@!\r:nohlsearch\r?\\v([A-Z0-9])@<![A-Z0-9]\\|([a-zA-Z0-9])@<![a-zA-Z0-9]\r:nohlsearch\rv``"<cr>]])
-
---make current inner word upper case
-vim.keymap.set('n', '<leader>u', 'gUiw', {desc="makes current word upper-case"})
-vim.keymap.set('n', '<leader>l', 'guiw', {desc="makes current word lower-case"})
 
 --apply format-columns onto the selection
 --format in columns for {} blocks (for enums usually)

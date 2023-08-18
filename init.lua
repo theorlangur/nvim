@@ -1,48 +1,28 @@
-vim.cmd.colorscheme("evening")
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
---misc
-vim.opt.compatible = false
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.incsearch = true
-vim.opt.smartcase = true
-vim.opt.ignorecase = true
-vim.opt.clipboard = 'unnamedplus'
+require 'plugins'
+require 'opts'
+require 'basic_keys'
+require 'config_telescope'
+require 'config_treesitter'
+require 'config_lsp'
+require 'config_completion'
+require 'config_nvim_tree'
 
---timeouts
-vim.opt.timeout = true
-vim.opt.timeoutlen = 300
-vim.opt.ttimeoutlen = 200
+require 'mycpp'
+require 'myxml'
 
---tabs
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-vim.opt.expandtab = true
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
 
-vim.g.mapleader = " "
-
---Lazy plugin manager
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup(
-{
-    { 'm00qek/baleia.nvim', tag = 'v1.3.0' }
-}
-)
-
-require('xml')
-require('mycpp')
-
-require('keymappings')
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et
