@@ -58,6 +58,16 @@ local function check_cwd_for_tasks_lua()
   end
 end
 
+local function get_command(value)
+  if type(value.cmd) == "string" then
+    return value.cmd
+  elseif type(value.cmd) == "table" then
+    return table.concat(value.cmd, " ")
+  elseif type(value.cmd) == "function" then
+    return value.cmd()
+  end
+end
+
 function M.tasks_picker(opts)
   check_cwd_for_tasks_lua()
   task_name_width = update_task_name_width(M.tasks)
@@ -80,7 +90,7 @@ function M.tasks_picker(opts)
       actions.select_default:replace(function()
           actions.close(prompt_bufnr)
           local selection = action_state.get_selected_entry()
-          send_term(selection.value.cmd)
+          send_term(get_command(selection.value))
         end)
       return true
     end

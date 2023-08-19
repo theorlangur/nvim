@@ -6,6 +6,7 @@ local function get_term_channel()
   if term_bufnr == -1 then
     vim.cmd('belowright 10split term://cmd.exe')
     term_bufnr = vim.fn.bufnr('^term://')
+    vim.cmd('normal G')--lock to the end
   end
   return vim.bo[term_bufnr].channel
 end
