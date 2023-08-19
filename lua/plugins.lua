@@ -118,4 +118,10 @@ require('lazy').setup({
       require("nvim-tree").setup {}
     end,
   },
-}, {})
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
+},
+{}
+)

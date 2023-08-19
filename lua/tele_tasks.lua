@@ -58,13 +58,14 @@ local function check_cwd_for_tasks_lua()
   end
 end
 
-local function get_command(value)
+local function get_command(value, callback)
   if type(value.cmd) == "string" then
-    return value.cmd
+    callback(value.cmd)
   elseif type(value.cmd) == "table" then
-    return table.concat(value.cmd, " ")
+    callback(table.concat(value.cmd, " "))
   elseif type(value.cmd) == "function" then
-    return value.cmd()
+    local r = value.cmd(callback)
+    if r ~= nil then callback(r) end
   end
 end
 
@@ -90,7 +91,14 @@ function M.tasks_picker(opts)
       actions.select_default:replace(function()
           actions.close(prompt_bufnr)
           local selection = action_state.get_selected_entry()
-          send_term(get_command(selection.value))
+          get_command(selection.value, function(cmd)
+            if cmd and type(cmd) == "string" then
+              send_term(cmd)
+            else
+              print("Expected command to execute got object of type "..type(cmd));
+              print("Value: "..vim.inspect(cmd));
+            end
+          end)
         end)
       return true
     end
