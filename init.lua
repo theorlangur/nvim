@@ -13,7 +13,9 @@ require 'config_nvim_tree'
 require 'mycpp'
 require 'myxml'
 
---require 'send_to_terminal'
+local tele_tasks = require ('tele_tasks')
+
+vim.keymap.set('n', '<leader>b', tele_tasks.tasks_picker, { desc = 'Open diagnostics list' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
