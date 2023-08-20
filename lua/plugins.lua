@@ -122,6 +122,8 @@ require('lazy').setup({
     'stevearc/dressing.nvim',
     opts = {},
   },
+  'mfussenegger/nvim-dap',
+  'rcarriga/nvim-dap-ui',
 },
 {}
 )
