@@ -10,6 +10,17 @@ function Interpolate(s, tab)
   return (s:gsub('($%b{})', function(w) return tab[w:sub(3, -2)] or w end))
 end
 
+--[[
+--Tasks format description:
+ {
+  {
+    name="Task name",
+    description="Task description",
+    cmd="command" or {"command", "--with", "--arguments"} or function() return "string"/table{} or function(callback) callback(result) end
+  }
+ }
+]]
+
 local M = { tasks = {} }
 
 local task_name_width = 15
