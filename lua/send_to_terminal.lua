@@ -1,10 +1,19 @@
 local M = {
 }
 
+local new_line = '\n'
+local shell = nil
+if vim.loop.os_uname().version:find('Windows') then
+  new_line = '\r'..new_line
+  shell = "cmd.exe"
+else
+  shell = "sh"
+end
+
 local function get_term_channel()
   local term_bufnr = vim.fn.bufnr('^term://')
   if term_bufnr == -1 then
-    vim.cmd('belowright 10split term://cmd.exe')
+    vim.cmd('belowright 10split term://'..shell)
     term_bufnr = vim.fn.bufnr('^term://')
     vim.cmd('normal G')--lock to the end
   end
@@ -12,7 +21,7 @@ local function get_term_channel()
 end
 
 function M.send_term(cmd)
-  vim.fn.chansend(get_term_channel(), cmd.."\r\n")
+  vim.fn.chansend(get_term_channel(), cmd..new_line)
 end
 
 return M
