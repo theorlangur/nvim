@@ -109,9 +109,9 @@ local function LogPoint()
 end
 
 --Key bindings---
-vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, {desc="Toggle Breakpoint"})
-vim.keymap.set('n', '<leader>dB', ConditionalBreakPoint, {desc="Toggle Conditional Breakpoint"})
-vim.keymap.set('n', '<leader>dl', LogPoint, {desc="Toggle Log Point"})
+vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, {desc="Toggle [b]reakpoint"})
+vim.keymap.set('n', '<leader>dc', ConditionalBreakPoint, {desc="Toggle [c]onditional Breakpoint"})
+vim.keymap.set('n', '<leader>dl', LogPoint, {desc="Toggle [l]og Point"})
 vim.keymap.set('n', '<leader>dr', StartDebug, {desc="Start/Continue debug execution"})
 vim.keymap.set('n', '<leader>dR', dap.run_to_cursor, {desc="[R]un to cursor"})
 vim.keymap.set('n', '<leader>dx', dap.terminate, {desc="Terminate debugging"})
