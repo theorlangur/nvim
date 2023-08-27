@@ -17,8 +17,8 @@ require 'myxml'
 local tele_tasks = require ('tele_tasks')
 local git_blame = require('git_blame_hint')
 
-vim.keymap.set('n', '<leader>b', tele_tasks.tasks_picker, { desc = 'Open diagnostics list' })
-vim.keymap.set('n', '<leader>gb', git_blame.blame_current_line, { desc = 'Blame current line' })
+vim.keymap.set('n', '<leader>b', tele_tasks.tasks_picker, { desc = 'Run a [B]uild task' })
+vim.keymap.set('n', '<leader>gb', git_blame.blame_current_line, { desc = '[G]it [B]lame current line' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
