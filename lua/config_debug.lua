@@ -100,21 +100,45 @@ local function StartDebug()
   dap.continue()
 end
 
+local function ConditionalBreakPoint()
+  dap.toggle_breakpoint(vim.fn.input('Breakpoint condition:'), nil, nil)
+end
+
+local function LogPoint()
+  dap.toggle_breakpoint(nil, nil, vim.fn.input('Enter log message:'))
+end
+
 --Key bindings---
-vim.keymap.set('n', '<leader>db', ':DapToggleBreakpoint<CR>', {desc="Toggle Breakpoint"})
+vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, {desc="Toggle Breakpoint"})
+vim.keymap.set('n', '<leader>dB', ConditionalBreakPoint, {desc="Toggle Conditional Breakpoint"})
+vim.keymap.set('n', '<leader>dl', LogPoint, {desc="Toggle Log Point"})
 vim.keymap.set('n', '<leader>dr', StartDebug, {desc="Start/Continue debug execution"})
-vim.keymap.set('n', '<leader>dx', ':DapTerminate<CR>', {desc="Terminate debugging"})
-vim.keymap.set('n', '<F10>', ':DapStepOver<CR>', {desc="Step Over"})
-vim.keymap.set('n', '<F11>', ':DapStepInto<CR>', {desc="Step Into"})
-vim.keymap.set('n', '<F12>', ':DapStepOut<CR>', {desc="Step Out"})
+vim.keymap.set('n', '<leader>dR', dap.run_to_cursor, {desc="[R]un to cursor"})
+vim.keymap.set('n', '<leader>dx', dap.terminate, {desc="Terminate debugging"})
+vim.keymap.set('n', '<F10>', dap.step_over, {desc="Step Over"})
+vim.keymap.set('n', '<F11>', dap.step_into, {desc="Step Into"})
+vim.keymap.set('n', '<F12>', dap.step_out, {desc="Step Out"})
 vim.keymap.set({'n', 'v'}, '<Leader>dh', require('dap.ui.widgets').hover, {desc="DAP: hover"})
 
+vim.keymap.set('n', '<leader>dwf', dap.focus_frame, {desc="Focus current frame"})
 vim.keymap.set('n', '<leader>dwe', make_jumper_to(""), {desc="Focus first Non-DAP UI"})
 vim.keymap.set('n', '<leader>dws', make_jumper_to("dapui_scopes"), {desc="Focus 'Scopes' in DAP UI"})
 vim.keymap.set('n', '<leader>dww', make_jumper_to("dapui_watches"), {desc="Focus 'Watches' in DAP UI"})
 vim.keymap.set('n', '<leader>dwb', make_jumper_to("dapui_breakpoints"), {desc="Focus 'Breakpoints' in DAP UI"})
 vim.keymap.set('n', '<leader>dwS', make_jumper_to("dapui_stacks"), {desc="Focus 'Stacks' in DAP UI"})
 --End of key bindings---
+--Sign definitions----
+--local namespace = vim.api.nvim_create_namespace("dap-hlng")
+vim.api.nvim_set_hl(0, 'DapBreakpoint', { fg='#993939', bg='#31353f' })
+vim.api.nvim_set_hl(0, 'DapLogPoint', { fg='#61afef', bg='#31353f' })
+vim.api.nvim_set_hl(0, 'DapStopped', { fg='#98c379', bg='#31353f' })
+
+vim.fn.sign_define('DapBreakpoint', {text='●', texthl='DapBreakpoint', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpointCondition', {text='❓', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapLogPoint', {text='📋', texthl='DapLogPoint', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpointRejected', {text='○', texthl='DapBreakpoint', linehl='', numhl=''})
+vim.fn.sign_define('DapStopped', {text='▶️', texthl='DapStopped', linehl='DapStopped', numhl=''})
+--End of sign definitions---
 
 if is_win then
   --TODO: find ms-vscode.cpptools independently of version
