@@ -2,6 +2,8 @@ local dap = require('dap')
 local dapui = require('dapui')
 local is_win = vim.loop.os_uname().version:find('Windows')
 
+--dap.set_log_level('TRACE')
+
 dapui.setup({
   mappings = {
     expand = "L"
@@ -108,6 +110,10 @@ local function LogPoint()
   dap.toggle_breakpoint(nil, nil, vim.fn.input('Enter log message:'))
 end
 
+local function ToggleHexView()
+  dap.session():set_value_format("toggle")
+end
+
 --Key bindings---
 vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, {desc="Toggle [b]reakpoint"})
 vim.keymap.set('n', '<leader>dc', ConditionalBreakPoint, {desc="Toggle [c]onditional Breakpoint"})
@@ -119,6 +125,7 @@ vim.keymap.set('n', '<F10>', dap.step_over, {desc="Step Over"})
 vim.keymap.set('n', '<F11>', dap.step_into, {desc="Step Into"})
 vim.keymap.set('n', '<F12>', dap.step_out, {desc="Step Out"})
 vim.keymap.set({'n', 'v'}, '<Leader>dh', require('dap.ui.widgets').hover, {desc="DAP: hover"})
+vim.keymap.set('n', '<leader>dvx', ToggleHexView, {desc="Toggle hex representation"})
 
 vim.keymap.set('n', '<leader>dwf', dap.focus_frame, {desc="Focus current frame"})
 vim.keymap.set('n', '<leader>dwe', make_jumper_to(""), {desc="Focus first Non-DAP UI"})
