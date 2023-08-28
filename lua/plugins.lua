@@ -117,6 +117,10 @@ require('lazy').setup({
     'stevearc/dressing.nvim',
     opts = {},
   },
+  {
+      "chrisgrieser/nvim-various-textobjs",
+      lazy = true,
+  },
   'mfussenegger/nvim-dap',
   'rcarriga/nvim-dap-ui',
 },

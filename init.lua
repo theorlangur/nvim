@@ -10,6 +10,7 @@ require 'config_lsp'
 require 'config_completion'
 require 'config_nvim_tree'
 require 'config_debug'
+require 'config_text_objects'
 
 require 'mycpp'
 require 'myxml'
