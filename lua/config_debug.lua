@@ -126,6 +126,7 @@ vim.keymap.set('n', '<leader>dws', make_jumper_to("dapui_scopes"), {desc="Focus 
 vim.keymap.set('n', '<leader>dww', make_jumper_to("dapui_watches"), {desc="Focus 'Watches' in DAP UI"})
 vim.keymap.set('n', '<leader>dwb', make_jumper_to("dapui_breakpoints"), {desc="Focus 'Breakpoints' in DAP UI"})
 vim.keymap.set('n', '<leader>dwS', make_jumper_to("dapui_stacks"), {desc="Focus 'Stacks' in DAP UI"})
+vim.keymap.set('n', '<leader>dwr', make_jumper_to("dap-repl"), {desc="Focus 'REPL' in DAP UI"})
 --End of key bindings---
 --Sign definitions----
 --local namespace = vim.api.nvim_create_namespace("dap-hlng")
