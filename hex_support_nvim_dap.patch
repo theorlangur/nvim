@@ -1,0 +1,91 @@
+diff --git a/lua/dap/session.lua b/lua/dap/session.lua
+index 5960124..74fca05 100644
+--- a/lua/dap/session.lua
++++ b/lua/dap/session.lua
+@@ -14,6 +14,13 @@ local mime_to_filetype = {
+   ['text/javascript'] = 'javascript'
+ }
+ 
++local value_format_requests = {
++  ['variables'] = 'format',
++  ['setVariable'] = 'format',
++  ['evaluate'] = 'format',
++  ['setExpression'] = 'format',
++}
++
+ 
+ local ns_pool = {}
+ do
+@@ -60,6 +67,7 @@ end
+ ---@field on_close table<string, fun(session: Session)> Handler per plugin-id. Invoked when a session closes (due to terminated event, disconnect or error cases like initialize errors, debug adapter process exit, ...). Session is assumed non-functional at this point and handler can be invoked within luv event loop (not API safe, may require vim.schedule)
+ ---@field children table<number, Session>
+ ---@field parent Session|nil
++---@field view_config table<string, any>
+ 
+ 
+ ---@class Client
+@@ -1120,7 +1128,10 @@ local function new_session(adapter, opts, handle)
+     on_close = {},
+     children = {},
+     handle = handle,
+-    client = {}
++    client = {},
++    view_config = {
++      hex = false
++    }
+   }
+   function state.client.write(line)
+     state.handle:write(line)
+@@ -1655,6 +1666,30 @@ function Session:request_with_timeout(command, arguments, timeout_ms, callback)
+   end)
+ end
+ 
++--- Sets a value format for the session
++---@param vf table|boolean|"toggle"
++---table - ValueFormat table ({hex=<boolean>}
++---boolean - value for 'hex' field
++---"toggle" - toggles current 'hex' field
++function Session:set_value_format(vf)
++  local changed = false
++  if vf then
++    changed = true
++    if type(vf) == "table" then
++      self.view_config = vf
++    elseif type(vf) == "boolean" then
++      self.view_config.hex = vf
++    elseif vf == "toggle" then
++      self.view_config.hex = not self.view_config.hex
++    else
++      changed = false
++    end
++  end
++  if changed == true then
++    self:_request_scopes(self.current_frame)
++  end
++end
++
+ 
+ --- Send a request to the debug adapter
+ ---@param command string command to execute
+@@ -1669,6 +1704,13 @@ function Session:request(command, arguments, callback)
+     command = command;
+     arguments = arguments
+   }
++  if self.capabilities.supportsValueFormattingOptions --[[and self.view_config.hex == true]] then
++    local vf_field = value_format_requests[command]
++    if vf_field then
++      if payload.arguments[vf_field] == nil then payload.arguments[vf_field] = {} end
++      payload.arguments[vf_field].hex = self.view_config.hex
++    end
++  end
+   log.debug('request', payload)
+   local current_seq = self.seq
+   self.seq = self.seq + 1
+@@ -1721,6 +1763,7 @@ function Session:initialize(config)
+     supportsVariableType = true;
+     supportsProgressReporting = true,
+     supportsStartDebuggingRequest = true,
++    supportsValueFormattingOptions = true,
+     locale = os.getenv('LANG') or 'en_US';
+   }, function(err0, result)
+     if err0 then
