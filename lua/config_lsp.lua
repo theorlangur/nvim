@@ -70,7 +70,7 @@ local clangd_path = nil
 local lua_ls_path = nil
 if is_win then
   clangd_path = "d:/Developing/cppindex/clangd/main.23.03.23/bin/clangd.exe"
-  lua_ls_path = "set here"
+  lua_ls_path = vim.loop.os_homedir().."/AppData/Local/nvim-data/lua-language-server/bin/lua-language-server.exe"
 else
   
   clangd_path = "/usr/bin/clangd"
