@@ -199,6 +199,16 @@ return {
         type = 'executable',
         command = '/usr/bin/lldb-vscode',
       }
+
+      dap.adapters.codelldb = {
+        id = 'codelldb',
+        type = 'server',
+        port = '3344',
+        executable = {
+          command = '/home/orlangur/.vscode-oss/extensions/vadimcn.vscode-lldb-1.9.2-universal/adapter/codelldb',
+          args = {'--port', '3344'},
+        }
+      }
     end
   end
 }
