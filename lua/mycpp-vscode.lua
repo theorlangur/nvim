@@ -1,0 +1,7 @@
+vim.keymap.set('n', 'gl'   , '<Cmd>call VSCodeNotify("editor.action.revealDeclaration")<cr>', {desc="Go to declaration"})
+vim.keymap.set('n', 'gpr'   , '<Cmd>call VSCodeNotify("editor.action.goToReferences")<cr>', {desc="Peek references"})
+vim.keymap.set('n', 'gr', '<Cmd>call VSCodeNotify("references-view.findReferences")<cr>', {desc="Go to references"})
+vim.keymap.set('n', 'gi'   , '<Cmd>call VSCodeNotify("editor.action.goToImplementation")<cr>', {desc="Go to implementations"})
+vim.keymap.set('n', ' k', '<Cmd>call VSCodeNotify("workbench.action.keepEditor")<cr>')
+vim.keymap.set('n', ' ct', '<Cmd>call VSCodeNotify("workbench.action.closeActiveEditor")<cr>')
+vim.keymap.set('n', ' co', '<Cmd>call VSCodeNotify("workbench.action.closeOtherEditors")<cr>')
