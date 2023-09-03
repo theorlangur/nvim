@@ -4,7 +4,7 @@ local conf = require("telescope.config").values
 local entry_display = require "telescope.pickers.entry_display"
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
-local send_term = require("send_to_terminal").send_term
+local send_term = require("custom.send_to_terminal").send_term
 
 function Interpolate(s, tab)
   return (s:gsub('($%b{})', function(w) return tab[w:sub(3, -2)] or w end))

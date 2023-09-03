@@ -3,11 +3,9 @@ vim.g.maplocalleader = ' '
 
 vim.cmd.colorscheme("evening")
 
-require 'plugins-vscode'
 require 'opts'
 require 'basic_keys'
-require 'config_treesitter'
-require 'config_text_objects'
+require 'plugins-vscode'
 
 require 'mycpp'
 require 'mycpp-vscode'
