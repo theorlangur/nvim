@@ -92,7 +92,6 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-fzf-native.nvim', },
     },
   },
-
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -108,9 +107,6 @@ require('lazy').setup({
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    config = function()
-      require("nvim-tree").setup {}
-    end,
   },
   {
     'stevearc/dressing.nvim',
