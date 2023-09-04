@@ -209,6 +209,10 @@ return {
           args = {'--port', '3344'},
         }
       }
+      dap.defaults.fallback.external_terminal = {
+        command = "/usr/bin/alacritty";
+        args = {"-e"};
+      }
     end
   end
 }
