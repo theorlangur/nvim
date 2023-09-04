@@ -1,6 +1,6 @@
-return {
+local M = {
   "chrisgrieser/nvim-various-textobjs",
-  event = {"BufReadPost", "BufNewFile"},
+  --event = {"BufReadPost", "BufNewFile"},
   config = function ()
     local to = require('various-textobjs')
     to.setup({ useDefaultKeymaps = false })
@@ -18,3 +18,8 @@ return {
     keymap({ "o", "x" }, "im", wrap('chainMember', 'inner'), {desc="Inner chain member call"})
   end
 }
+
+if vim.g.vscode == nil then
+  M.event = {"BufReadPost", "BufNewFile"}
+end
+return M

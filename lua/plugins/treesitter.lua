@@ -1,10 +1,10 @@
-return {
+local M = {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
-  event = {"BufReadPost", "BufNewFile"},
+  --event = {"BufReadPost", "BufNewFile"},
   build = ':TSUpdate',
   config = function ()
     -- [[ Configure Treesitter ]]
@@ -66,3 +66,8 @@ return {
     vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
   end
 }
+
+if vim.g.vscode == nil then
+  M.event = {"BufReadPost", "BufNewFile"}
+end
+return M
