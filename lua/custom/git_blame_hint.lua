@@ -6,6 +6,7 @@ local function get_or_create_info_buf()
   if buf == -1 then
     buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_name(buf, buf_name)
+    vim.api.nvim_buf_set_keymap(buf, "n", "q", ":q<cr>", {desc="Close git blame popup"})
   end
   return buf
 end
@@ -31,6 +32,7 @@ local function get_or_create_window(buf)
     end
     local opts = {relative='win', width=win_width, height=h, col=0, row=r, anchor=anc, style='minimal', border='rounded'}
     local win = vim.api.nvim_open_win(buf, true, opts)
+    vim.api.nvim_win_set_option(win, "wrap", true)
     vim.api.nvim_create_autocmd({"BufLeave"}, {
       buffer = buf,
       callback = function()
