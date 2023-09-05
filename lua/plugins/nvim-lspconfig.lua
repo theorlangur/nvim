@@ -78,7 +78,21 @@ return {
       end
     end
 
+    local nvim_cfg = vim.fn.stdpath 'config'
+    local local_lsp_config = nvim_cfg .. '/lua/local_lsp.lua'
+    if vim.loop.fs_stat(local_lsp_config) ~= nil then
+      local ok, mod = pcall(dofile, local_lsp_config)
+      if not ok then
+        print("Loading local lsp config from "..local_lsp_config.." has failed")
+      elseif type(mod) == "function" then
+        mod(require('lspconfig'), capabilities, on_attach)
+      else
+        print("Loading local lsp config from "..local_lsp_config.." returned unexpected value")
+        print("Expected function got "..type(mod))
+      end
+    end
     --vim.lsp.set_log_level("trace")
+    --[[
     local clangd_path = nil
     local lua_ls_path = nil
     local rust_path = nil
@@ -120,6 +134,6 @@ return {
         }
       }
     }
-
+    ]]
   end
 }

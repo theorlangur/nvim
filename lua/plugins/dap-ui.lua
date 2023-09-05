@@ -7,7 +7,6 @@ return {
   config = function ()
     local dap = require('dap')
     local dapui = require('dapui')
-    local is_win = vim.loop.os_uname().version:find('Windows')
 
     --dap.set_log_level('TRACE')
 
@@ -155,6 +154,21 @@ return {
     vim.fn.sign_define('DapStopped', {text='▶️', texthl='DapStopped', linehl='DapStopped', numhl=''})
     --End of sign definitions---
 
+    local nvim_cfg = vim.fn.stdpath 'config'
+    local local_dap_config = nvim_cfg .. '/lua/local_dap.lua'
+    if vim.loop.fs_stat(local_dap_config) ~= nil then
+      local ok, mod = pcall(dofile, local_dap_config)
+      if not ok then
+        print("Loading local dap config from "..local_dap_config.." has failed")
+      elseif type(mod) == "function" then
+        mod(dap)
+      else
+        print("Loading local dap config from "..local_dap_config.." returned unexpected value")
+        print("Expected function got "..type(mod))
+      end
+    end
+
+    --[[
     if is_win then
       --TODO: find ms-vscode.cpptools independently of version
       dap.adapters.cppdbg = {
@@ -193,26 +207,7 @@ return {
           args = {'--port', '3344'},
         }
       }
-    else
-      dap.adapters.lldb = {
-        id = 'lldb',
-        type = 'executable',
-        command = '/usr/bin/lldb-vscode',
-      }
-
-      dap.adapters.codelldb = {
-        id = 'codelldb',
-        type = 'server',
-        port = '3344',
-        executable = {
-          command = '/home/orlangur/.vscode-oss/extensions/vadimcn.vscode-lldb-1.9.2-universal/adapter/codelldb',
-          args = {'--port', '3344'},
-        }
-      }
-      dap.defaults.fallback.external_terminal = {
-        command = "/usr/bin/alacritty";
-        args = {"-e"};
-      }
     end
+    ]]
   end
 }
