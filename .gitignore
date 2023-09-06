@@ -1,4 +1,4 @@
 lazy-lock.json
 lua/.luarc.json
-/lua/local_dap.lua
-/lua/local_lsp.lua
+lua/local_dap.lua
+lua/local_lsp.lua
