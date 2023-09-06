@@ -9,5 +9,8 @@ return {
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        lualine_x = {'vim.b.current_function', 'encoding', 'fileformat', 'filetype'},
+      }
     },
   }
