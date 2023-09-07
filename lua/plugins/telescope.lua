@@ -1,19 +1,24 @@
 return {
   'nvim-telescope/telescope.nvim',
-  branch = '0.1.x',
+  --branch = '0.1.x',
+  branch = 'master',
   dependencies = {
     'nvim-lua/plenary.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', },
   },
   config = function ()
+    local actions = require('telescope.actions')
+    local actions_layout = require('telescope.actions.layout')
+    local prints_left = 3
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
     require('telescope').setup {
       defaults = {
+        path_display = {"truncate"},
         mappings = {
           i = {
-            ['<C-u>'] = false,
-            ['<C-d>'] = false,
+            ['<esc>'] = actions.close,
+            ['<M-p>'] = actions_layout.toggle_preview,
           },
         },
       },
