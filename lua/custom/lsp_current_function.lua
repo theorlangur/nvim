@@ -127,3 +127,9 @@ vim.api.nvim_create_autocmd('CursorMoved', {
         end
     end
 })
+
+vim.api.nvim_create_autocmd({'BufUnload'}, {
+    callback = function(ev)
+        latest_doc_syms[ev.buf] = nil
+    end
+})
