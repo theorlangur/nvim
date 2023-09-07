@@ -1,13 +1,13 @@
 local lsp_proto = require('vim.lsp.protocol')
 local scope_kinds = {
- Class = true,
- Function = true,
- Method = true,
- Struct = true,
- Enum = true,
- Interface = true,
- Namespace = true,
- Module = true,
+ Class = {''},
+ Function = {'󰊕'},
+ Method = {''},
+ Struct = {''},
+ Enum = {''},
+ Interface = {''},
+ Namespace = {''},
+ Module = {'󰕳'},
 }
 local latest_doc_syms = {
     --[bufnr] => {filtered result list}
@@ -74,7 +74,12 @@ local function getRangeSymbolForWin(w, syms)
     for i = #syms, 1, -1 do
         local sym = syms[i]
         if sym.range and in_range(cursor_pos, sym.range) then
-          return sym.kind.." "..sym.text
+          local desc = scope_kinds[sym.kind]
+          if desc and desc[1] ~= '' then
+            return desc[1].." "..sym.text
+          else
+            return sym.kind.." "..sym.text
+          end
         end
     end
     return nil
