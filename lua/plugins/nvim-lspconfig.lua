@@ -39,7 +39,8 @@ return {
       local telescope_lsp_doc_sym = require('telescope.builtin').lsp_document_symbols;
       nmap('<leader>ds', function() telescope_lsp_doc_sym({ symbol_width=50, symbol_type_width=8 }); end, '[D]ocument [S]ymbols')
 
-      nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+      --nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+      nmap('<leader>ws', require('custom.lsp_telescope_enchanced').dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
       -- See `:help K` for why this keymap
       nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
