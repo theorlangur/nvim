@@ -1,5 +1,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.gitblame_enabled = 0
 
 require 'opts'
 require 'basic_keys'

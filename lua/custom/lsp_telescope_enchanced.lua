@@ -6,8 +6,6 @@ local make_entry = require "telescope.make_entry"
 local actions_state = require "telescope.actions.state"
 local utils = require "telescope.utils"
 local channel = require("plenary.async.control").channel
---local entry_display = require "telescope.pickers.entry_display"
---local action_state = require "telescope.actions.state"
 
 local lsp = {}
 
@@ -94,7 +92,7 @@ end
 local function toggle_through_symbol_filter(prompt_bufnr, opts)
   if opts.temp.sym_types_sorted == nil then
     local toggle_array = {}
-    for k,v in pairs(opts.temp.sym_types) do
+    for k,_ in pairs(opts.temp.sym_types) do
       toggle_array[#toggle_array + 1] = k
     end
     table.sort(toggle_array)
