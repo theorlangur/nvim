@@ -114,7 +114,7 @@ local function toggle_through_symbol_filter(prompt_bufnr, opts)
   opts.temp.selected_sym_index = s
   opts.temp.selected_sym = opts.temp.sym_types_sorted[s]
   update_prompt_title(prompt_bufnr, opts, opts.temp.selected_sym)
-  actions_state.get_current_picker(prompt_bufnr):refresh()
+  actions_state.get_current_picker(prompt_bufnr):try_refresh_cache()
 end
 
 lsp.dynamic_workspace_symbols = function(opts)

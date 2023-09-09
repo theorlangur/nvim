@@ -1,0 +1,82 @@
+diff --git a/lua/telescope/entry_manager.lua b/lua/telescope/entry_manager.lua
+index a8331e4..4bb7670 100644
+--- a/lua/telescope/entry_manager.lua
++++ b/lua/telescope/entry_manager.lua
+@@ -24,6 +24,7 @@ function EntryManager:new(max_results, set_entry, info)
+     max_results = max_results,
+     set_entry = set_entry,
+     worst_acceptable_score = math.huge,
++    last_results = {}
+   }, self)
+ end
+ 
+@@ -105,6 +106,10 @@ function EntryManager:_append_container(picker, new_container, should_update)
+   end
+ end
+ 
++function EntryManager:save_entry(entry)
++  self.last_results[#self.last_results + 1] = entry
++end
++
+ function EntryManager:add_entry(picker, score, entry, prompt)
+   score = score or 0
+ 
+diff --git a/lua/telescope/pickers.lua b/lua/telescope/pickers.lua
+index 3c2c2d4..c33f715 100644
+--- a/lua/telescope/pickers.lua
++++ b/lua/telescope/pickers.lua
+@@ -479,6 +479,17 @@ function Picker:find()
+       -- TODO: Entry manager should have a "bulk" setter. This can prevent a lot of redraws from display
+       if self.cache_picker == false or self.cache_picker.is_cached ~= true then
+         self.sorter:_start(prompt)
++        local prev_finder = nil
++        if self.refresh_cache_request == true and #self.manager.last_results > 0 then
++          local last_results = self.manager.last_results
++          prev_finder = self.finder
++          self.finder = function(_, p_result, p_complete)
++            for i=1,#last_results,1 do
++              p_result(last_results[i])
++            end
++            p_complete()
++          end
++        end
+         self.manager = EntryManager:new(self.max_results, self.entry_adder, self.stats)
+ 
+         self:_reset_highlights()
+@@ -489,6 +500,9 @@ function Picker:find()
+           self.finder(prompt, process_result, process_complete)
+         end)
+ 
++        if prev_finder ~= nil then self.finder = prev_finder end
++        self.refresh_cache_request = false
++
+         if not ok then
+           log.warn("Finder failed with msg: ", msg)
+         end
+@@ -932,6 +946,11 @@ function Picker:refresh(finder, opts)
+   end
+ end
+ 
++function Picker:try_refresh_cache()
++  self.refresh_cache_request = true
++  self:refresh()
++end
++
+ ---Set the selection to the provided `row`
+ ---@param row number
+ function Picker:set_selection(row)
+@@ -1275,11 +1294,13 @@ function Picker:get_result_processor(find_id, prompt, status_updater)
+ 
+   local cb_add = function(score, entry)
+     -- may need the prompt for tiebreak
++    self.manager:save_entry(entry)
+     self.manager:add_entry(self, score, entry, prompt)
+     status_updater { completed = false }
+   end
+ 
+-  local cb_filter = function(_)
++  local cb_filter = function(entry)
++    self.manager:save_entry(entry)
+     self:_increment "filtered"
+   end
+ 
