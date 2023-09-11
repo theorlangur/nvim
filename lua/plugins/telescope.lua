@@ -1,3 +1,16 @@
+local function delete_other_buffers(prompt_bufnr)
+  local bufs = vim.api.nvim_list_bufs()
+  for i=1,#bufs,1 do
+    local b = bufs[i]
+    if b ~= prompt_bufnr and vim.fn.buflisted(b) == 1 then
+      vim.print("Deleting b="..tostring(b).."; name="..vim.api.nvim_buf_get_name(b))
+      local force = vim.api.nvim_buf_get_option(b, "buftype") == "terminal"
+      local ok = pcall(vim.api.nvim_buf_delete, b, { force = force })
+    end
+  end
+  require('telescope.actions').close(prompt_bufnr)
+end
+
 return {
   'nvim-telescope/telescope.nvim',
   --branch = '0.1.x',
@@ -22,6 +35,16 @@ return {
           },
         },
       },
+      pickers = {
+        buffers = {
+          mappings = {
+            i = {
+              ["<c-d>"] = "delete_buffer",
+              ["<c-o>"] = delete_other_buffers,
+            }
+          }
+        }
+      }
     }
 
     -- Enable telescope fzf native, if installed
