@@ -121,8 +121,9 @@ lsp.dynamic_workspace_symbols = function(opts)
   opts.winnr = opts.winnr or vim.api.nvim_get_current_win()
   opts.temp = {selected_sym='', sym_types={}}
   local real_entry_maker = opts.entry_maker or make_entry.gen_from_lsp_symbols(opts)
+  --local cwd = vim.fn.getcwd()
   local sym_type_collector = function(entry)
-    local symbol_msg = entry.text
+    local symbol_msg = entry.text--:gsub(cwd, "")
     local symbol_type = symbol_msg:match "%[(.+)%]%s+.*"
     opts.temp.sym_types[symbol_type] = true;
     return real_entry_maker(entry)
