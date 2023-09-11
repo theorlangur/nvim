@@ -9,6 +9,7 @@ return {
 
     -- Adds LSP completion capabilities
     'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer'
   },
 
   config = function()
@@ -56,8 +57,11 @@ return {
       },
       sources = {
         { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        --{ name = 'luasnip' },
         --text from opened buffers
+      },
+      {
+        { name = 'buffer' },
       },
     }
   end
