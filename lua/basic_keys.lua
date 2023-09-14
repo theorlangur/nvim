@@ -12,6 +12,9 @@ vim.keymap.set('n', '<A-l>' ,  '<C-w>>', {desc="increase window width"})
 vim.keymap.set('n', '<A-j>' ,  '<C-w>+', {desc="increase window height"})
 vim.keymap.set('n', '<A-k>' ,  '<C-w>-', {desc="reduce window height"})
 
+--jump to previous file
+vim.keymap.set('n', 'zf' ,  '<C-^>', {desc="Jump to previous [F]ile"})
+
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
