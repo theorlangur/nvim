@@ -17,7 +17,7 @@ local M = {
       auto_install = false,
 
       highlight = { enable = vim.g.vscode == nil },
-      indent = { enable = true },
+      --indent = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {
