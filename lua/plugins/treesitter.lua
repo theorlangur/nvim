@@ -21,10 +21,8 @@ local M = {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = '<c-space>',
-          node_incremental = '<c-space>',
-          scope_incremental = '<c-s>',
-          node_decremental = '<M-space>',
+          node_incremental = 'v',
+          node_decremental = 'V',
         },
       },
       textobjects = {
@@ -54,7 +52,16 @@ local M = {
           goto_previous_start = {
             ['[a'] = {query="@parameter.inner", desc="Prev argument"}
           }
-        }
+        },
+        swap = {
+          enable = true,
+          swap_next = {
+            ["<leader>a"] = "@parameter.inner",
+          },
+          swap_previous = {
+            ["<leader>A"] = "@parameter.inner",
+          },
+        },
       },
     }
     local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
