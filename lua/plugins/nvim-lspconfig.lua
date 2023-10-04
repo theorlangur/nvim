@@ -34,7 +34,7 @@ return {
       nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
       nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
       nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-      nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+      nmap('gt', vim.lsp.buf.type_definition, 'Type [D]efinition')
 
       local telescope_lsp_doc_sym = require('telescope.builtin').lsp_document_symbols;
       nmap('<leader>ds', function() telescope_lsp_doc_sym({ symbol_width=50, symbol_type_width=8 }); end, '[D]ocument [S]ymbols')
@@ -48,6 +48,10 @@ return {
 
       -- Lesser used LSP functionality
       nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+      nmap('<leader>gd', ':vsplit | lua vim.lsp.buf.definition()<cr>', '[v]split [G]oto [D]efinition')
+      nmap('<leader>gD', ':vsplit | lua vim.lsp.buf.declaration()<cr>', '[v]split [G]oto [D]eclaration')
+      nmap('<leader>gt', ':vsplit | lua vim.lsp.buf.type_definition()<cr>', '[v]split [G]oto [T]ype')
       --nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
       --nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
       --nmap('<leader>wl', function()
