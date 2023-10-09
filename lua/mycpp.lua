@@ -5,6 +5,7 @@ function CppMappings(args)
     vim.keymap.set('n', '<Space>h', 'yiwO<ESC>@h<C-r>0<ESC>', {desc="Insert /**...**/ header block", buffer= args.buf})
 
     --C++ related stuff
+    --[[
     vim.keymap.set('n', ' sc'  , 'astatic_cast<><ESC>', {desc="adds static_cast<>", buffer= args.buf})
     vim.keymap.set('n', ' dc'  , 'adynamic_cast<><ESC>', {desc="adds dynamic_cast<>", buffer= args.buf})
     vim.keymap.set('n', ' rc'  , 'areinterpret_cast<><ESC>', {desc="adds reinterpret_cast<>", buffer= args.buf})
@@ -15,5 +16,6 @@ function CppMappings(args)
 
     --BaseClass::<MethodName>()
     vim.keymap.set('n', ' i', 'mi?::.*(<CR>2lyt(\'ipbiBaseClass::<ESC>ea();<ESC>==$hi', {desc="inserts 'BaseClass::<current method name>'", buffer= args.buf})
+    ]]
 end
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, { pattern={"*.c", "*.h", "*.cpp", "*.hpp"}, callback=CppMappings })
