@@ -68,4 +68,4 @@ function M.blame_current_line()
   local w = get_or_create_window(b)
 end
 
-return M
+return {}

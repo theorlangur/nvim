@@ -1,4 +1,5 @@
 return {
+  --[[
   "nvim-tree/nvim-tree.lua",
   version = "*",
   lazy = false,
@@ -53,4 +54,5 @@ return {
     })
     vim.keymap.set('n', '<leader>f', ':NvimTreeFindFile<cr>', { silent=true, noremap=true, desc = 'Show/Hide [F]iles tree' })
   end
+  ]]
 }
