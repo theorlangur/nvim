@@ -33,5 +33,7 @@ vim.keymap.set('n', '<leader>gcd', ':Git checkout DimaExp<cr>', { desc = "Checko
 vim.keymap.set('n', '<leader>gmff', ':Git merge --ff-only DimaExp<cr>', { desc = "Merge fast-forward from DimaExp" })
 vim.keymap.set('n', '<leader>gp', ':Git push<cr>', { desc = "Git Push" })
 vim.keymap.set('n', '<leader>gb', ':Git blame<cr>', { desc = "Git Blame" })
+vim.keymap.set('n', '<leader>ghb', ':!perl tools/beautify/beautify.pl -git<cr>', { desc = "Git pre-commit beautify -git" })
+vim.keymap.set('n', '<leader>ghB', ':!perl tools/beautify/beautify.pl -git -gitcached<cr>', { desc = "Git pre-commit beautify -git cached" })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
