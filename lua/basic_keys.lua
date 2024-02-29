@@ -5,6 +5,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 --ESC mapping
 vim.keymap.set({'i', 'v', 'c'}, 'jk', '<ESC>')
+vim.keymap.set({'t'}, 'jk', '<C-\\><C-n>', {noremap=true})
 
 --Window management
 vim.keymap.set('n', '<A-h>' ,  '<C-w><', {desc="reduce window width"})
