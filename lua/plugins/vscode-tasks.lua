@@ -7,11 +7,12 @@ return {
   },
   config = function()
     local vstasks = require('vstask')
-    local _sh = nil
+    local cfg = {}
     if vim.loop.os_uname().version:find('Windows') then
-      _sh = "powershell.exe"
+      cfg.shell = "powershell.exe"
+      cfg.arg_quotes = "'"
     end
-    vstasks.setup({shell=_sh})
+    vstasks.setup(cfg)
     local ts = require('telescope')
     vim.keymap.set('n', '<leader>ta', ts.extensions.vstask.tasks, { desc = 'Run VSCode tasks' })
     vim.keymap.set('n', '<leader>ti', ts.extensions.vstask.inputs, { desc = 'Run VSCode inputs' })
