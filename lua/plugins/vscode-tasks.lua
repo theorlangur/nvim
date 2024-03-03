@@ -10,7 +10,6 @@ return {
     local cfg = {}
     if vim.loop.os_uname().version:find('Windows') then
       cfg.shell = "powershell.exe"
-      cfg.arg_quotes = "'"
     end
     vstasks.setup(cfg)
     local ts = require('telescope')
