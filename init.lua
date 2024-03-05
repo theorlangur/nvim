@@ -13,6 +13,8 @@ local tele_tasks = require ('custom.tele_tasks')
 --local git_blame = require('custom.git_blame_hint')
 require('custom.lsp_current_function')
 
+require 'local_configs'
+
 vim.keymap.set('n', '<leader>b', tele_tasks.tasks_picker, { desc = 'Run a [B]uild task' })
 --vim.keymap.set('n', '<leader>gb', git_blame.blame_current_line, { desc = '[G]it [B]lame current line' })
 
