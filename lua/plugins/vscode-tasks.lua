@@ -14,8 +14,8 @@ return {
     vstasks.setup(cfg)
     local clear_inputs = vstasks.Telescope.Clear_inputs
     local ts = require('telescope')
-    vim.keymap.set('n', '<leader>ta', ts.extensions.vstask.tasks, { desc = 'Run VSCode tasks' })
-    vim.keymap.set('n', '<leader>ti', ts.extensions.vstask.inputs, { desc = 'Run VSCode inputs' })
-    vim.keymap.set('n', '<leader>tc', clear_inputs, { desc = 'Clear VSCode inputs' })
+    vim.keymap.set('n', '<leader>vs', ts.extensions.vstask.tasks, { desc = 'Run VSCode tasks' })
+    vim.keymap.set('n', '<leader>vi', ts.extensions.vstask.inputs, { desc = 'Run VSCode inputs' })
+    vim.keymap.set('n', '<leader>vc', clear_inputs, { desc = 'Clear VSCode inputs' })
   end
 }
