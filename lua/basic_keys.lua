@@ -13,6 +13,15 @@ vim.keymap.set('n', '<A-l>' ,  '<C-w>>', {desc="increase window width"})
 vim.keymap.set('n', '<A-j>' ,  '<C-w>+', {desc="increase window height"})
 vim.keymap.set('n', '<A-k>' ,  '<C-w>-', {desc="reduce window height"})
 
+--Tab management
+vim.keymap.set('n', '<leader>pa' ,  '<cmd>$tab split<cr>', {desc="Tab [p]age [a]ppend"})
+vim.keymap.set('n', '<leader>pc' ,  '<cmd>tabclose<cr>', {desc="Tab [p]age [c]lose"})
+vim.keymap.set('n', '<leader>po' ,  '<cmd>tabonly<cr>', {desc="Tab [p]age [o]nly"})
+vim.keymap.set('n', '<leader>p1' ,  '1gt', {desc="Goto tab [p]age [1]"})
+vim.keymap.set('n', '<leader>p2' ,  '2gt', {desc="Goto tab [p]age [2]"})
+vim.keymap.set('n', '<leader>p3' ,  '3gt', {desc="Goto tab [p]age [3]"})
+vim.keymap.set('n', '<leader>p4' ,  '4gt', {desc="Goto tab [p]age [4]"})
+
 --jump to previous file
 vim.keymap.set('n', 'zf' ,  '<C-^>', {desc="Jump to previous [F]ile"})
 
