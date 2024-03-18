@@ -15,3 +15,6 @@ vim.keymap.set('n', '<leader>sp', find_projects, { desc = '[S]earch in [P]roject
 vim.keymap.set('n', '<leader>sgr', live_grep_resources, { desc = '[S]earch by [G]rep in [R]esources' })
 vim.keymap.set('n', '<leader>sgs', live_grep_sources, { desc = '[S]earch by [G]rep in [S]ources' })
 vim.keymap.set('n', '<leader>sgp', live_grep_projects, { desc = '[S]earch by [G]rep in [P]rojects' })
+vim.keymap.set('v', '<leader>svr', '"zy<ESC><cmd>exec \'Telescope live_grep cwd=resource default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection in [R]esources'})
+vim.keymap.set('v', '<leader>svs', '"zy<ESC><cmd>exec \'Telescope live_grep cwd=source default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection in [S]ources'})
+vim.keymap.set('v', '<leader>svp', '"zy<ESC><cmd>exec \'Telescope live_grep cwd=projects default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection in [P]rojects'})

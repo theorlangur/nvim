@@ -50,23 +50,25 @@ return {
     -- Enable telescope fzf native, if installed
     pcall(require('telescope').load_extension, 'fzf')
 
+    local tele = require('telescope.builtin')
+
     -- See `:help telescope.builtin`
-    vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-    vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+    vim.keymap.set('n', '<leader>?', tele.oldfiles, { desc = '[?] Find recently opened files' })
+    vim.keymap.set('n', '<leader><space>', tele.buffers, { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '<leader>/', function()
       -- You can pass additional configuration to telescope to change theme, layout, etc.
-      require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+      tele.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 10,
         previewer = false,
       })
     end, { desc = '[/] Fuzzily search in current buffer' })
 
-    vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-    vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<leader>sgb', require('telescope.builtin').git_branches, { desc = '[S]earch [G]it [B]ranches' })
-    vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-    vim.keymap.set('n', '<leader>sgg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('v', '<leader>sv', 'y<ESC>:Telescope live_grep default_text=<c-r>0<CR>', { desc = '[S]earch [V]isual selection'})
+    vim.keymap.set('n', '<leader>gf', tele.git_files, { desc = 'Search [G]it [F]iles' })
+    vim.keymap.set('n', '<leader>sf', tele.find_files, { desc = '[S]earch [F]iles' })
+    vim.keymap.set('n', '<leader>sgb', tele.git_branches, { desc = '[S]earch [G]it [B]ranches' })
+    vim.keymap.set('n', '<leader>sw', tele.grep_string, { desc = '[S]earch current [W]ord' })
+    vim.keymap.set('n', '<leader>sgg', tele.live_grep, { desc = '[S]earch by [G]rep' })
+    vim.keymap.set('n', '<leader>sd', tele.diagnostics, { desc = '[S]earch [D]iagnostics' })
+    vim.keymap.set('v', '<leader>sv', '"zy<ESC><cmd>exec \'Telescope live_grep default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection'})
   end
 }
