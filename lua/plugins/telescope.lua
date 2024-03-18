@@ -69,6 +69,6 @@ return {
     vim.keymap.set('n', '<leader>sw', tele.grep_string, { desc = '[S]earch current [W]ord' })
     vim.keymap.set('n', '<leader>sgg', tele.live_grep, { desc = '[S]earch by [G]rep' })
     vim.keymap.set('n', '<leader>sd', tele.diagnostics, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('v', '<leader>sv', '"zy<ESC><cmd>exec \'Telescope live_grep default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection'})
+    vim.keymap.set('v', '<leader>svv', '"zy<ESC><cmd>exec \'Telescope live_grep default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection'})
   end
 }
