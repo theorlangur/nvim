@@ -27,6 +27,10 @@ vim.keymap.set('n', 'zf' ,  '<C-^>', {desc="Jump to previous [F]ile"})
 
 --enter visual block ode
 vim.keymap.set('n', '<leader>[' ,  '<C-v>', {desc="Enter visual block mode"})
+vim.keymap.set({'n', 'v'}, '<leader>na' ,  '<C-a>', {desc="Increment"})
+vim.keymap.set({'n', 'v'}, '<leader>nx' ,  '<C-x>', {desc="Decrement"})
+vim.keymap.set('v', '<leader>nga' ,  'g<C-a>', {desc="Increment sequence"})
+vim.keymap.set('v', '<leader>ngx' ,  'g<C-x>', {desc="Decrement sequence"})
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
