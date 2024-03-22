@@ -25,6 +25,8 @@ vim.keymap.set('n', '<leader>p4' ,  '4gt', {desc="Goto tab [p]age [4]"})
 --jump to previous file
 vim.keymap.set('n', 'zf' ,  '<C-^>', {desc="Jump to previous [F]ile"})
 
+--enter visual block ode
+vim.keymap.set('n', '<leader>[' ,  '<C-v>', {desc="Enter visual block mode"})
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
