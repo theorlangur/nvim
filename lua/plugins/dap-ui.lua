@@ -105,7 +105,25 @@ return {
     end
 
     local function StartDebug()
-      check_cwd_for_launch_lua()
+      --check_cwd_for_launch_lua()
+      dap.configurations.cpp = {
+         {
+            name = 'Try vsdbg',
+            type = "cppvsdbg",
+            request = "launch",
+            program = 'd:\\Developing\\grandma_main\\gma3\\obj\\windows\\gma3\\Debug\\app_gma3_unprotected.exe',
+            cwd = 'd:\\Developing\\grandma_main\\gma3',
+            clientID = 'vscode',
+            clientName = 'Visual Studio Code',
+            externalTerminal = true,
+            columnsStartAt1 = true,
+            linesStartAt1 = true,
+            locale = "en",
+            pathFormat = "path",
+            externalConsole = true
+            -- console = "externalTerminal"
+          },
+      }
       dap.continue()
     end
 
