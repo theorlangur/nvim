@@ -15,6 +15,26 @@ return {
     dap_vscode.load_launchjs(nil, { lldb = {'c', 'cpp'}, codelldb = {'c', 'cpp'}, cppvsdbg = {'c', 'cpp'} })
     --dap.set_log_level('TRACE')
 
+    --[[
+    local RunHandshake = require('custom.nvim_lua_dap_adapter.handshake')
+    dap.adapters.cppvsdbg = {
+      id = 'cppvsdbg',
+      type = 'executable',
+      --command = 'C:\\Users\\DmitryD\\.vscode\\extensions\\ms-vscode.cpptools-1.19.9-win32-x64\\debugAdapters\\vsdbg\\bin\\vsdbg.exe',
+      command = 'd:\\Developing\\devenv\\vsdbg_adapter\\vsdbg\\bin\\vsdbg.exe',
+      args = {
+        '--interpreter=vscode'
+      },
+      options = {
+        --detached = false
+        externalTerminal=true,
+      },
+      runInTerminal=true,
+      reverse_request_handlers={
+        handshake=RunHandshake
+      }
+    }
+  ]]
     dapui.setup({
       mappings = {
         expand = "L"
