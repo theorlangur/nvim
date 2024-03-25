@@ -9,6 +9,10 @@ return {
     local dap = require('dap')
     local dapui = require('dapui')
 
+
+    local dap_vscode = require('dap.ext.vscode')
+    dap_vscode.json_decode = vim.json.decode
+    dap_vscode.load_launchjs(nil, { lldb = {'c', 'cpp'}, codelldb = {'c', 'cpp'}, cppvsdbg = {'c', 'cpp'} })
     --dap.set_log_level('TRACE')
 
     dapui.setup({
@@ -106,7 +110,7 @@ return {
 
     local function StartDebug()
       --check_cwd_for_launch_lua()
-      dap.configurations.cpp = {
+      --[[dap.configurations.cpp = {
          {
             name = 'Try vsdbg',
             type = "cppvsdbg",
@@ -123,7 +127,7 @@ return {
             externalConsole = true
             -- console = "externalTerminal"
           },
-      }
+      }]]
       dap.continue()
     end
 
