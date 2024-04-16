@@ -163,13 +163,18 @@ return {
       dap.session():set_value_format("toggle")
     end
 
+    local function CloseDap()
+      dapui.close()
+      dap.terminate()
+    end
+
     --Key bindings---
     vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, {desc="Toggle [b]reakpoint"})
     vim.keymap.set('n', '<leader>dc', ConditionalBreakPoint, {desc="Toggle [c]onditional Breakpoint"})
     vim.keymap.set('n', '<leader>dl', LogPoint, {desc="Toggle [l]og Point"})
     vim.keymap.set('n', '<leader>dr', StartDebug, {desc="Start/Continue debug execution"})
     vim.keymap.set('n', '<leader>dR', dap.run_to_cursor, {desc="[R]un to cursor"})
-    vim.keymap.set('n', '<leader>dx', dap.terminate, {desc="Terminate debugging"})
+    vim.keymap.set('n', '<leader>dx', CloseDap, {desc="Terminate debugging"})
     vim.keymap.set('n', '<F10>', dap.step_over, {desc="Step Over"})
     vim.keymap.set('n', '<F11>', dap.step_into, {desc="Step Into"})
     vim.keymap.set('n', '<F12>', dap.step_out, {desc="Step Out"})
