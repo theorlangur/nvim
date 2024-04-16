@@ -9,7 +9,8 @@ end
 
 function RunHandshake(self, request_payload)
   vim.print("RunHandshake: ", request_payload)
-  local signResult = io.popen('node d:\\Developing\\devenv\\vsdbg_adapter\\signature\\sign.js ' .. request_payload.arguments.value)
+  local cfg = vim.fn.stdpath("config")
+  local signResult = io.popen('node '..cfg..'\\lua\\custom\\nvim_lua_dap_adapter\\sign.js ' .. request_payload.arguments.value)
   if signResult == nil then
     utils.notify('error while signing handshake', vim.log.levels.ERROR)
     return
