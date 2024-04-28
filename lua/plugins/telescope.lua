@@ -17,15 +17,39 @@ return {
   branch = 'master',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    {
+        "nvim-telescope/telescope-live-grep-args.nvim" ,
+        -- This will not install any breaking changes.
+        -- For major updates, this must be adjusted manually.
+        version = "^1.0.0",
+    },
     { 'nvim-telescope/telescope-fzf-native.nvim', },
   },
   config = function ()
     local actions = require('telescope.actions')
     local actions_layout = require('telescope.actions.layout')
     local prints_left = 3
+    local telescope = require('telescope')
+    local lga_actions = require("telescope-live-grep-args.actions")
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
-    require('telescope').setup {
+    telescope.setup {
+      extensions = {
+        live_grep_args = {
+              auto_quoting = true, -- enable/disable auto-quoting
+              -- define mappings, e.g.
+              mappings = { -- extend mappings
+                i = {
+                  ["<C-k>"] = lga_actions.quote_prompt(),
+                  ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                },
+              },
+              -- ... also accepts theme settings, for example:
+              -- theme = "dropdown", -- use dropdown theme
+              -- theme = { }, -- use own theme spec
+              -- layout_config = { mirror=true }, -- mirror preview pane
+            }
+      },
       defaults = {
         path_display = {"truncate"},
         mappings = {
@@ -48,8 +72,8 @@ return {
     }
 
     -- Enable telescope fzf native, if installed
-    pcall(require('telescope').load_extension, 'fzf')
-
+    pcall(telescope.load_extension, 'fzf')
+    local live_grep_args_ext = telescope.extensions.live_grep_args
     local tele = require('telescope.builtin')
 
     -- See `:help telescope.builtin`
@@ -67,7 +91,7 @@ return {
     vim.keymap.set('n', '<leader>sf', tele.find_files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>sgb', tele.git_branches, { desc = '[S]earch [G]it [B]ranches' })
     vim.keymap.set('n', '<leader>sw', tele.grep_string, { desc = '[S]earch current [W]ord' })
-    vim.keymap.set('n', '<leader>sgg', tele.live_grep, { desc = '[S]earch by [G]rep' })
+    vim.keymap.set('n', '<leader>sgg', live_grep_args_ext.live_grep_args, { desc = '[S]earch by [G]rep' })
     vim.keymap.set('n', '<leader>sd', tele.diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('v', '<leader>svv', '"zy<ESC><cmd>exec \'Telescope live_grep default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection'})
   end
