@@ -19,3 +19,9 @@ function CppMappings(args)
     ]]
 end
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, { pattern={"*.c", "*.h", "*.cpp", "*.hpp"}, callback=CppMappings })
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function(ev)
+        vim.bo[ev.buf].commentstring = "//%s"
+    end,
+    pattern={"cpp", "cxx", "c"},
+})
