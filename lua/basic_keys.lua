@@ -47,6 +47,10 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- save all
-vim.keymap.set('n', '<leader><leader>w', '<cmd>wa<cr>', {desc="Save All"})
+vim.keymap.set('n', '<leader>ww', '<cmd>wa<cr>', {desc="Save All"})
 -- quit all
-vim.keymap.set('n', '<leader><leader>q', '<cmd>qa<cr>', {desc="Quit All"})
+vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', {desc="Quit All"})
+-- quickfix close
+vim.keymap.set('n', '<leader>cc', '<cmd>cclose<cr>', {desc="QuickFix Close"})
+-- quickfix close
+vim.keymap.set('n', '<leader>co', '<cmd>copen<cr>', {desc="QuickFix Open"})
