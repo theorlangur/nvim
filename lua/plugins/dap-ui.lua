@@ -10,9 +10,9 @@ return {
     local dapui = require('dapui')
 
 
-    local dap_vscode = require('dap.ext.vscode')
-    dap_vscode.json_decode = vim.json.decode
-    dap_vscode.load_launchjs(nil, { lldb = {'rust', 'c', 'cpp'}, codelldb = {'rust', 'c', 'cpp'}, cppvsdbg = {'c', 'cpp'} })
+    -- local dap_vscode = require('dap.ext.vscode')
+    -- dap_vscode.json_decode = vim.json.decode
+    -- dap_vscode.load_launchjs(nil, { lldb = {'rust', 'c', 'cpp'}, codelldb = {'rust', 'c', 'cpp'}, cppvsdbg = {'c', 'cpp'} })
     --dap.set_log_level('TRACE')
 
     --[[
