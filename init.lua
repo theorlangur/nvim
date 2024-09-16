@@ -8,6 +8,7 @@ require 'lazycfg'
 
 require 'mycpp'
 require 'myxml'
+require 'quickfix'
  
 require('custom.lsp_current_function')
 
