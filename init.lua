@@ -7,6 +7,7 @@ require 'basic_keys'
 require 'lazycfg'
 
 require 'mycpp'
+require 'markdown'
 require 'myxml'
 require 'quickfix'
  
