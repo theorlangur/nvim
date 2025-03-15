@@ -24,6 +24,7 @@ return {
         version = "^1.0.0",
     },
     { 'nvim-telescope/telescope-fzf-native.nvim', },
+    { 'crispgm/telescope-heading.nvim', },
   },
   config = function ()
     local actions = require('telescope.actions')
@@ -73,6 +74,7 @@ return {
 
     -- Enable telescope fzf native, if installed
     pcall(telescope.load_extension, 'fzf')
+    pcall(telescope.load_extension, 'heading')
     local live_grep_args_ext = telescope.extensions.live_grep_args
     local tele = require('telescope.builtin')
 

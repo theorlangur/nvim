@@ -7,5 +7,6 @@ function MarkupMappings(args)
     vim.keymap.set('n', '<Space>W', 'EBi`<ESC>lEa`<ESC>', {desc="Enclose [w]ord in``", buffer= args.buf})
     vim.keymap.set('v', '<Space>m', '<ESC>\'<O```<ESC>\'>o```<ESC>', {desc="Enclose visual block in```", buffer= args.buf})
     vim.keymap.set('v', '<Space>w', '<ESC>`<i`<ESC>`>la`<ESC>', {desc="Enclose visual selection in``", buffer= args.buf})
+    vim.keymap.set('n', '<Space>j', ':Telescope heading<CR>', {desc="[J]ump to heading", buffer= args.buf})
 end
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, { pattern={"*.md"}, callback=MarkupMappings })
