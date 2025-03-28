@@ -1,0 +1,27 @@
+\usepackage{xpatch,realboxes}
+\usepackage{xcolor}
+\usepackage{etoolbox}
+\definecolor{Light}{HTML}{E8E8E8}
+
+\lstset{
+    basicstyle=\ttfamily,
+    extendedchars=true
+    numbers=left,
+    numberstyle=\tiny\ttfamily,
+    backgroundcolor=\color[HTML]{E0E0E0},
+    showstringspaces=false,
+    tabsize=2,
+    columns=fixed,
+    frame=trbl,
+    frameround=tttt,
+    framesep=7pt,
+    %breaklines=true, postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
+}
+
+\BeforeBeginEnvironment{lstlisting}{\par\noindent\begin{minipage}{\linewidth}}
+\AfterEndEnvironment{lstlisting}{\end{minipage}\par\addvspace{\topskip}}
+
+\makeatletter
+\pretocmd\lstinline{\Colorbox{Light}\bgroup\appto\lst@DeInit{\egroup}}{}{}
+\makeatother
+
