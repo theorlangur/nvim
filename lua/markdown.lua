@@ -10,8 +10,21 @@ function MarkupMappings(args)
     vim.keymap.set('n', '<Space>j', ':Telescope heading<CR>', {desc="[J]ump to heading", buffer= args.buf})
 
     vim.g.nvim_config_path = vim.fn.stdpath('config')
-    local pandoc_cfg = "--resource-path=\"..g:nvim_config_path..\"/pandoc -H listing.tex --listings -V geometry:margin=.5in"
-    vim.api.nvim_create_user_command('ToPdf', "execute \"!pandoc --from=gfm --to=pdf "..pandoc_cfg.." -o %:r.pdf %\"", {});
-    vim.api.nvim_create_user_command('ToDoc', "execute \"!pandoc --from=gfm --to=docx "..pandoc_cfg.." -o %:r.docx %\"", {});
+    vim.api.nvim_command([[
+        command! -nargs=* ToPDF silent
+        let pandoc_cmd = '!pandoc --from=gfm --to=pdf --resource-path=' . shellescape(g:nvim_config_path) . '/pandoc -H listing.tex --listings -V geometry:margin=.5in -o %:r.pdf %'
+        if <q-args> != ''
+            let pandoc_cmd .= ' ' . <q-args>
+        endif
+        execute pandoc_cmd
+        ]])
+    vim.api.nvim_command([[
+        command! -nargs=* ToDoc silent
+        let pandoc_cmd = '!pandoc --from=gfm --to=docx --resource-path=' . shellescape(g:nvim_config_path) . '/pandoc -H listing.tex --listings -V geometry:margin=.5in -o %:r.docx %'
+        if <q-args> != ''
+            let pandoc_cmd .= ' ' . <q-args>
+        endif
+        execute pandoc_cmd
+        ]])
 end
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, { pattern={"*.md"}, callback=MarkupMappings })
