@@ -12,7 +12,7 @@ local function make_copy_line_number_function(with_function)
     -- Combine the filename and line number
     local text_to_copy = string.format("%s:%d", relative_filename, line_number)
 
-    local cur_f = vim.b.current_function
+    local cur_f = vim.b.current_function_naked
     if cur_f ~= nil and with_function then
       text_to_copy = text_to_copy.." ("..cur_f..")"
     end

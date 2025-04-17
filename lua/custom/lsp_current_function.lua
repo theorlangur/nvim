@@ -76,9 +76,9 @@ local function getRangeSymbolForWin(w, syms)
         if sym.range and in_range(cursor_pos, sym.range) then
           local desc = scope_kinds[sym.kind]
           if desc and desc[1] ~= '' then
-            return desc[1].." "..sym.text
+            return desc[1].." "..sym.text, sym.text
           else
-            return sym.kind.." "..sym.text
+            return sym.kind.." "..sym.text, sym.text
           end
         end
     end
@@ -92,8 +92,9 @@ local function docSymHandler(_, result, ctx, _)
     latest_doc_syms[ctx.bufnr] = function_symbols
 
     if vim.api.nvim_win_get_buf(0) == ctx.bufnr then
-        local fn_name = getRangeSymbolForWin(0, function_symbols)
+        local fn_name, naked_name = getRangeSymbolForWin(0, function_symbols)
         vim.b.current_function = fn_name
+        vim.b.current_function_naked = naked_name
     end
 end
 
@@ -121,8 +122,9 @@ vim.api.nvim_create_autocmd('CursorMoved', {
         if vim.api.nvim_win_get_buf(w) == bufnr then
             local function_symbols = latest_doc_syms[bufnr]
             if function_symbols then
-                local fn_name = getRangeSymbolForWin(w, function_symbols)
+                local fn_name, naked_name = getRangeSymbolForWin(w, function_symbols)
                 vim.b.current_function = fn_name
+                vim.b.current_function_naked = naked_name
             end
         end
     end
