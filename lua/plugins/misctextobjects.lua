@@ -3,7 +3,7 @@ local M = {
   --event = {"BufReadPost", "BufNewFile"},
   config = function ()
     local to = require('various-textobjs')
-    to.setup({ useDefaultKeymaps = false })
+    to.setup({ keymaps={useDefaults = false} })
 
     local function wrap(f, arg)
       local _f = to[f]
