@@ -107,7 +107,7 @@ end
 vim.api.nvim_create_autocmd({'TextChanged', 'InsertLeave', 'LspAttach'}, {
     callback = function(ev)
         local bufnr = ev.buf
-        local clients = vim.lsp.get_active_clients({bufnr=bufnr})
+        local clients = vim.lsp.get_clients({bufnr=bufnr})
         if clients and #clients > 0 then
           local params = {textDocument = vim.lsp.util.make_text_document_params(bufnr)}
           vim.lsp.buf_request(bufnr, 'textDocument/documentSymbol', params, docSymHandler)
