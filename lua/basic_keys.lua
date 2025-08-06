@@ -21,6 +21,9 @@ vim.keymap.set('n', '<leader>p1' ,  '1gt', {desc="Goto tab [p]age [1]"})
 vim.keymap.set('n', '<leader>p2' ,  '2gt', {desc="Goto tab [p]age [2]"})
 vim.keymap.set('n', '<leader>p3' ,  '3gt', {desc="Goto tab [p]age [3]"})
 vim.keymap.set('n', '<leader>p4' ,  '4gt', {desc="Goto tab [p]age [4]"})
+vim.keymap.set('n', '<leader>pn' ,  '<cmd>tabnext<cr>', {desc="Tab [p]age [n]ext"})
+vim.keymap.set('n', '<leader>pp' ,  '<cmd>tabprev<cr>', {desc="Tab [p]age [p]revious"})
+vim.keymap.set('n', '<leader>pN' ,  '<cmd>tabnew<cr>', {desc="Tab [p]age [N]ew"})
 
 --jump to previous file
 vim.keymap.set('n', 'zf' ,  '<C-^>', {desc="Jump to previous [F]ile"})
