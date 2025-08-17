@@ -4,6 +4,7 @@ vim.g.maplocalleader = ' '
 
 require 'opts'
 require 'basic_keys'
+require 'session_management'
 require 'lazycfg'
 
 require 'mycpp'
