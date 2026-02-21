@@ -90,7 +90,7 @@ return {
       if not ok then
         print("Loading local lsp config from "..local_lsp_config.." has failed")
       elseif type(mod) == "function" then
-        mod(require('lspconfig'), capabilities, on_attach)
+        mod(capabilities, on_attach)
       else
         print("Loading local lsp config from "..local_lsp_config.." returned unexpected value")
         print("Expected function got "..type(mod))
