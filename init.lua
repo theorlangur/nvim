@@ -39,3 +39,5 @@ vim.keymap.set('n', '<leader>ghB', ':!perl tools/beautify/beautify.pl -git -gitc
 vim.keymap.set('n', '<leader>ggp', ':!.\\tools\\generate_projects\\generate_projects.exe force<cr>', { desc = "Generate Projects" })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+vim.lsp.enable({'clangd', 'lua_ls', 'rust_analyzer'})
