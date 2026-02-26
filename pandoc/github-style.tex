@@ -1,0 +1,119 @@
+\documentclass[11pt]{article}
+
+% Page geometry
+\usepackage{geometry}
+\geometry{letterpaper, margin=1.2in}
+
+% Typography (Requires XeLaTeX or LuaLaTeX)
+\usepackage{fontspec}
+\setmainfont{Arial} % You can change this to Helvetica or Segoe UI
+\setmonofont[Scale=0.9]{Courier New} % Or Consolas / SF Mono
+
+% Paragraph spacing (GitHub separates paragraphs with space, no indents)
+\usepackage{parskip}
+
+% Colors based on GitHub's UI
+\usepackage{xcolor}
+\definecolor{ghblue}{HTML}{0969da}
+\definecolor{ghgray}{HTML}{57606a}
+\definecolor{ghlightgray}{HTML}{f6f8fa}
+\definecolor{ghborder}{HTML}{d0d7de}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ghblue,
+    urlcolor=ghblue,
+    citecolor=ghblue,
+    pdfborder={0 0 0}
+}
+
+% Section Headings
+\usepackage{titlesec}
+\titleformat{\section}{\Huge\bfseries\sffamily}{\thesection}{1em}{}[\vspace{0.2em}\color{ghborder}\titlerule]
+\titleformat{\subsection}{\Large\bfseries\sffamily}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\large\bfseries\sffamily}{\thesubsubsection}{1em}{}
+
+% Blockquotes (Grey left border)
+\usepackage{mdframed}
+\newmdenv[
+    topline=false,
+    rightline=false,
+    bottomline=false,
+    leftline=true,
+    linewidth=4pt,
+    linecolor=ghborder,
+    backgroundcolor=white,
+    innertopmargin=0pt,
+    innerbottommargin=0pt,
+    innerrightmargin=0pt,
+    fontcolor=ghgray
+]{ghquote}
+\renewenvironment{quote}{\begin{ghquote}}{\end{ghquote}}
+
+% Code Blocks (Pandoc injects highlighting macros here)
+$if(highlighting-macros)$
+$highlighting-macros$
+
+% Enable automatic line wrapping for long code lines
+\usepackage{fvextra}
+\RecustomVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
+
+% Override Pandoc's default Shaded environment for code blocks
+\usepackage{tcolorbox}
+\renewenvironment{Shaded}{
+  \vspace{0.5em}
+  \begin{tcolorbox}[
+    colback=ghlightgray,
+    colframe=ghborder,
+    boxrule=0.5pt,
+    arc=4pt,
+    left=5pt, right=5pt, top=5pt, bottom=5pt
+  ]
+}{
+  \end{tcolorbox}
+  \vspace{0.5em}
+}
+$endif$
+
+% Pandoc requires this tightlist macro for lists
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Image handling
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+% Inline code styling (grey background, rounded corners)
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{%
+  \tcbox[
+    on line, 
+    boxsep=0pt, 
+    left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, 
+    colback=ghlightgray, 
+    colframe=ghborder, 
+    boxrule=0.5pt, 
+    arc=2pt
+  ]{\oldtexttt{#1}}%
+}
+
+\begin{document}
+
+$if(title)$
+\begin{center}
+    {\Huge \bfseries $title$}
+    $if(author)$\\[0.5em] {\large $author$}$endif$
+    $if(date)$\\[0.5em] {\large $date$}$endif$
+\end{center}
+\vspace{1em}
+$endif$
+
+$body$
+
+\end{document}

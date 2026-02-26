@@ -16,7 +16,7 @@ function MarkupMappings(args)
     vim.g.nvim_config_path = vim.fn.stdpath('config')
     vim.api.nvim_command([[
         command! -nargs=* ToPDF silent
-        let pandoc_cmd = '!pandoc --from=gfm --to=pdf --resource-path=' . shellescape(g:nvim_config_path) . '/pandoc -H listing.tex --listings -V geometry:margin=.5in -o %:r.pdf %'
+        let pandoc_cmd = '!pandoc --from=gfm --to=pdf --resource-path=' . shellescape(g:nvim_config_path) . '/pandoc -H github-style.tex --listings -V geometry:margin=.5in -o %:r.pdf %'
         if <q-args> != ''
             let pandoc_cmd .= ' ' . <q-args>
         endif
