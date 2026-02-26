@@ -16,6 +16,7 @@ require 'copy_line_number'
 require('custom.lsp_current_function')
 
 require 'local_configs'
+require 'local_zephyr_config'
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
