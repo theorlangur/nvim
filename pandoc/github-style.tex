@@ -12,6 +12,11 @@
 % Paragraph spacing (GitHub separates paragraphs with space, no indents)
 \usepackage{parskip}
 
+% Give LaTeX permission to stretch spaces so unbroken boxes drop to the next line
+%\setlength{\emergencystretch}{3em}
+% Replace the \emergencystretch line with this:
+\sloppy % Forces LaTeX to break lines even if it creates huge spaces
+
 % Colors based on GitHub's UI
 \usepackage{xcolor}
 \definecolor{ghblue}{HTML}{0969da}
