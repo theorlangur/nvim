@@ -4,10 +4,10 @@
 \usepackage{geometry}
 \geometry{letterpaper, margin=1.2in}
 
-% Typography (Requires XeLaTeX or LuaLaTeX)
-\usepackage{fontspec}
-\setmainfont{Arial} % You can change this to Helvetica or Segoe UI
-\setmonofont[Scale=0.9]{Courier New} % Or Consolas / SF Mono
+% Typography (Cross-platform LaTeX fonts)
+\usepackage{tgheros} % Loads TeX Gyre Heros (Arial/Helvetica clone)
+\renewcommand{\familydefault}{\sfdefault} % Makes the whole document sans-serif
+\usepackage{tgcursor} % Loads TeX Gyre Cursor (Courier clone) for code blocks
 
 % Paragraph spacing (GitHub separates paragraphs with space, no indents)
 \usepackage{parskip}
@@ -28,12 +28,21 @@
     citecolor=ghblue,
     pdfborder={0 0 0}
 }
+% Tell LaTeX to number headers down to Level 4 (####)
+\setcounter{secnumdepth}{4}
 
 % Section Headings
 \usepackage{titlesec}
 \titleformat{\section}{\Huge\bfseries\sffamily}{\thesection}{1em}{}[\vspace{0.2em}\color{ghborder}\titlerule]
 \titleformat{\subsection}{\Large\bfseries\sffamily}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\large\bfseries\sffamily}{\thesubsubsection}{1em}{}
+
+% Fix for Level 4 (####) and Level 5 (#####) headers to ensure they drop to a new line
+\titleformat{\paragraph}{\normalsize\bfseries\sffamily}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{1.5ex}{0.5ex}
+
+\titleformat{\subparagraph}{\normalsize\bfseries\sffamily\color{ghgray}}{\thesubparagraph}{1em}{}
+\titlespacing*{\subparagraph}{0pt}{1.5ex}{0.5ex}
 
 % Blockquotes (Grey left border)
 \usepackage{mdframed}
@@ -62,9 +71,11 @@ $highlighting-macros$
 
 % Override Pandoc's default Shaded environment for code blocks
 \usepackage{tcolorbox}
+\tcbuselibrary{breakable} % Tells tcolorbox it is allowed to break across pages
 \renewenvironment{Shaded}{
   \vspace{0.5em}
   \begin{tcolorbox}[
+    breakable, % Applies the page-breaking behavior to this specific box
     colback=ghlightgray,
     colframe=ghborder,
     boxrule=0.5pt,
@@ -92,15 +103,15 @@ $endif$
 % Inline code styling (grey background, rounded corners)
 \let\oldtexttt\texttt
 \renewcommand{\texttt}[1]{%
-  \tcbox[
-    on line, 
-    boxsep=0pt, 
-    left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, 
-    colback=ghlightgray, 
-    colframe=ghborder, 
-    boxrule=0.5pt, 
-    arc=2pt
-  ]{\oldtexttt{#1}}%
+ \tcbox[
+   on line, 
+   boxsep=0pt, 
+   left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, 
+   colback=ghlightgray, 
+   colframe=ghborder, 
+   boxrule=0.5pt, 
+   arc=2pt
+ ]{\oldtexttt{#1}}%
 }
 
 \begin{document}
