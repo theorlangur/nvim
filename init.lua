@@ -2,6 +2,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 --vim.g.gitblame_enabled = 0
 
+require 'system_id'
 require 'opts'
 require 'basic_keys'
 require 'session_management'
@@ -16,7 +17,9 @@ require 'copy_line_number'
 require('custom.lsp_current_function')
 
 require 'local_configs'
-require 'local_zephyr_config'
+if SYSTEM_ID.zephyr then
+  require 'local_zephyr_config'
+end
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`

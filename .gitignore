@@ -1,5 +1,6 @@
 lazy-lock.json
 lua/.luarc.json
 lua/local_dap.lua
-lua/local_lsp.lua
+lua/local_zephyr_config.lua
+lua/system_id.lua
 .*sess*

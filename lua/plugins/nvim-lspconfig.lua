@@ -84,7 +84,12 @@ return {
     end
 
     local nvim_cfg = vim.fn.stdpath 'config'
-    local local_lsp_config = nvim_cfg .. '/lua/local_lsp.lua'
+    local local_lsp_config = nvim_cfg .. '/lua/'
+    if SYSTEM_ID.prefix then
+      local_lsp_config = local_lsp_config..SYSTEM_ID.prefix..'_local_lsp.lua'
+    else
+      local_lsp_config = local_lsp_config..'local_lsp.lua'
+    end
     if vim.loop.fs_stat(local_lsp_config) ~= nil then
       local ok, mod = pcall(dofile, local_lsp_config)
       if not ok then
