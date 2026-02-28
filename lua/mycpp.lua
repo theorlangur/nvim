@@ -17,6 +17,8 @@ function CppMappings(args)
     --BaseClass::<MethodName>()
     vim.keymap.set('n', ' i', 'mi?::.*(<CR>2lyt(\'ipbiBaseClass::<ESC>ea();<ESC>==$hi', {desc="inserts 'BaseClass::<current method name>'", buffer= args.buf})
     ]]
+
+    vim.keymap.set('n', '<S-U>'  , ':LspClangdSwitchSourceHeader<cr>', {desc="Clangd: Switch source-header", buffer= args.buf})
 end
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, { pattern={"*.c", "*.h", "*.cpp", "*.hpp"}, callback=CppMappings })
 vim.api.nvim_create_autocmd("FileType", {
