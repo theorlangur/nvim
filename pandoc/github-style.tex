@@ -9,13 +9,8 @@
 \renewcommand{\familydefault}{\sfdefault} % Makes the whole document sans-serif
 \usepackage{tgcursor} % Loads TeX Gyre Cursor (Courier clone) for code blocks
 
-% Paragraph spacing (GitHub separates paragraphs with space, no indents)
+% Paragraph spacing
 \usepackage{parskip}
-
-% Give LaTeX permission to stretch spaces so unbroken boxes drop to the next line
-%\setlength{\emergencystretch}{3em}
-% Replace the \emergencystretch line with this:
-\sloppy % Forces LaTeX to break lines even if it creates huge spaces
 
 % Colors based on GitHub's UI
 \usepackage{xcolor}
@@ -33,6 +28,11 @@
     citecolor=ghblue,
     pdfborder={0 0 0}
 }
+
+% Make boxes available globally (Fixes the \tcbox Undefined error)
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+
 % Tell LaTeX to number headers down to Level 4 (####)
 \setcounter{secnumdepth}{4}
 
@@ -42,10 +42,9 @@
 \titleformat{\subsection}{\Large\bfseries\sffamily}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\large\bfseries\sffamily}{\thesubsubsection}{1em}{}
 
-% Fix for Level 4 (####) and Level 5 (#####) headers to ensure they drop to a new line
+% Fix for Level 4 (####) and Level 5 (#####) headers
 \titleformat{\paragraph}{\normalsize\bfseries\sffamily}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}{0pt}{1.5ex}{0.5ex}
-
 \titleformat{\subparagraph}{\normalsize\bfseries\sffamily\color{ghgray}}{\thesubparagraph}{1em}{}
 \titlespacing*{\subparagraph}{0pt}{1.5ex}{0.5ex}
 
@@ -66,6 +65,9 @@
 ]{ghquote}
 \renewenvironment{quote}{\begin{ghquote}}{\end{ghquote}}
 
+% Force LaTeX to break lines even if it creates large spaces
+\sloppy 
+
 % Code Blocks (Pandoc injects highlighting macros here)
 $if(highlighting-macros)$
 $highlighting-macros$
@@ -75,12 +77,10 @@ $highlighting-macros$
 \RecustomVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
 
 % Override Pandoc's default Shaded environment for code blocks
-\usepackage{tcolorbox}
-\tcbuselibrary{breakable} % Tells tcolorbox it is allowed to break across pages
 \renewenvironment{Shaded}{
   \vspace{0.5em}
   \begin{tcolorbox}[
-    breakable, % Applies the page-breaking behavior to this specific box
+    breakable,
     colback=ghlightgray,
     colframe=ghborder,
     boxrule=0.5pt,
@@ -105,18 +105,19 @@ $endif$
 \makeatother
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 
-% Inline code styling (grey background, rounded corners)
+% Inline code styling (grey background, rounded corners, wrappable)
 \let\oldtexttt\texttt
 \renewcommand{\texttt}[1]{%
- \tcbox[
-   on line, 
-   boxsep=0pt, 
-   left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, 
-   colback=ghlightgray, 
-   colframe=ghborder, 
-   boxrule=0.5pt, 
-   arc=2pt
- ]{\oldtexttt{#1}}%
+  \allowbreak%
+  \tcbox[
+    on line, 
+    boxsep=0pt, 
+    left=3pt, right=3pt, top=1.5pt, bottom=1.5pt, 
+    colback=ghlightgray, 
+    colframe=ghborder, 
+    boxrule=0.5pt, 
+    arc=2pt
+  ]{\oldtexttt{#1}}%
 }
 
 \begin{document}
