@@ -89,9 +89,10 @@ return {
       })
     end, { desc = '[/] Fuzzily search in current buffer' })
 
-    vim.keymap.set('n', '<leader>gf', tele.git_files, { desc = 'Search [G]it [F]iles' })
     vim.keymap.set('n', '<leader>sf', tele.find_files, { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<leader>sgb', tele.git_branches, { desc = '[S]earch [G]it [B]ranches' })
+    vim.keymap.set('n', '<leader>Gf', tele.git_files, { desc = 'Search [G]it [F]iles' })
+    vim.keymap.set('n', '<leader>Gb', tele.git_branches, { desc = '[S]earch [G]it [B]ranches' })
+    vim.keymap.set('n', '<leader>Gs', tele.git_status, { desc = '[S]earch [G]it [S]tatus' })
     vim.keymap.set('n', '<leader>sw', tele.grep_string, { desc = '[S]earch current [W]ord' })
     vim.keymap.set('n', '<leader>sgg', live_grep_args_ext.live_grep_args, { desc = '[S]earch by [G]rep' })
     vim.keymap.set('n', '<leader>sd', tele.diagnostics, { desc = '[S]earch [D]iagnostics' })

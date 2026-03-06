@@ -1,6 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
+vim.opt.shadafile = vim.fn.stdpath("data") .. "/vscode.shada"
+vim.g.shadafile = vim.fn.stdpath("data") .. "/vscode.shada"
 vim.cmd.colorscheme("evening")
 
 require 'opts'
