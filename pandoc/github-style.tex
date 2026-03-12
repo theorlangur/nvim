@@ -4,10 +4,34 @@
 \usepackage{geometry}
 \geometry{letterpaper, margin=1.2in}
 
-% Typography (Cross-platform LaTeX fonts)
-\usepackage{tgheros} % Loads TeX Gyre Heros (Arial/Helvetica clone)
+% Typography (Cross-platform XeLaTeX fonts via filenames)
+\usepackage{fontspec}
+
+\setmainfont{texgyreheros}[
+  Extension = .otf,
+  UprightFont = *-regular,
+  BoldFont = *-bold,
+  ItalicFont = *-italic,
+  BoldItalicFont = *-bolditalic
+]
+
+\setsansfont{texgyreheros}[
+  Extension = .otf,
+  UprightFont = *-regular,
+  BoldFont = *-bold,
+  ItalicFont = *-italic,
+  BoldItalicFont = *-bolditalic
+]
 \renewcommand{\familydefault}{\sfdefault} % Makes the whole document sans-serif
-\usepackage{tgcursor} % Loads TeX Gyre Cursor (Courier clone) for code blocks
+
+\setmonofont{texgyrecursor}[
+  Scale=0.9,
+  Extension = .otf,
+  UprightFont = *-regular,
+  BoldFont = *-bold,
+  ItalicFont = *-italic,
+  BoldItalicFont = *-bolditalic
+]
 
 % Paragraph spacing
 \usepackage{parskip}
