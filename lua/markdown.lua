@@ -13,10 +13,20 @@ function MarkupMappings(args)
     vim.keymap.set('n', '<Space>j', ':Telescope heading<CR>', {desc="[J]ump to heading", buffer= args.buf})
     vim.keymap.set('v', '<Space>l', '<ESC>`<i[<ESC>`>la](<ESC>"+pa)<ESC>', {desc="Make visual selection into a link from clipboard", buffer= args.buf})
 
+    local is_windows = vim.fn.has("win32") == 1
+    local path_sep = is_windows and "\\" or "/"
+    local res_sep = is_windows and ";" or ":"
+
     vim.g.nvim_config_path = vim.fn.stdpath('config')
     vim.api.nvim_command([[
         command! -nargs=* ToPDF silent
-        let pandoc_cmd = '!pandoc --from=gfm --to=pdf --resource-path=' . shellescape(g:nvim_config_path) . '/pandoc --template=github-style.tex --pdf-engine=xelatex --highlight-style=tango -o %:r.pdf %'
+        " Get the current file's directory
+        let current_file_dir = expand('%:p:h')
+
+        " Combine the config path and the file directory (using colon as separator)
+        let res_paths = shellescape(g:nvim_config_path . '/pandoc]].. res_sep..[[' . current_file_dir)
+
+        let pandoc_cmd = '!pandoc --from=gfm --to=pdf --resource-path=' . res_paths . ' --template=github-style.tex --pdf-engine=xelatex --highlight-style=tango -o %:r.pdf %'
         if <q-args> != ''
             let pandoc_cmd .= ' ' . <q-args>
         endif
@@ -24,7 +34,13 @@ function MarkupMappings(args)
         ]])
     vim.api.nvim_command([[
         command! -nargs=* ToDoc silent
-        let pandoc_cmd = '!pandoc  --resource-path=' . shellescape(g:nvim_config_path) . '/pandoc --reference-doc=github-reference.docx --highlight-style=tango -o %:r.docx %'
+        " Get the current file's directory
+        let current_file_dir = expand('%:p:h')
+
+        " Combine the config path and the file directory (using colon as separator)
+        let res_paths = shellescape(g:nvim_config_path . '/pandoc]].. res_sep..[[' . current_file_dir)
+
+        let pandoc_cmd = '!pandoc  --resource-path=' . res_paths . ' --reference-doc=github-reference.docx --highlight-style=tango -o %:r.docx %'
         if <q-args> != ''
             let pandoc_cmd .= ' ' . <q-args>
         endif

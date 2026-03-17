@@ -117,6 +117,19 @@ $highlighting-macros$
 }
 $endif$
 
+% Fix for Pandoc 3.x \pandocbounded error
+\makeatletter
+\newsavebox\pandas@box
+\providecommand{\pandocbounded}[1]{%
+  \sbox\pandas@box{#1}%
+  \ifdim\wd\pandas@box>\linewidth
+    \resizebox{\linewidth}{!}{\usebox\pandas@box}%
+  \else
+    \usebox\pandas@box
+  \fi
+}
+\makeatother
+
 % Pandoc requires this tightlist macro for lists
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
