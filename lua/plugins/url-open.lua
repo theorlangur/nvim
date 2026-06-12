@@ -13,12 +13,12 @@ return {
           extra_patterns = {
             {
               pattern = '#(%d+)',
-              prefix = "https://grandma3.wbb.malighting.de/issues/",
+              prefix = "https://tickets.wbb.malighting.de/issues/",
               suffix = "",
             },
             {
               pattern = 'issue=(%d+)',
-              prefix = "https://grandma3.wbb.malighting.de/issues/",
+              prefix = "https://tickets.wbb.malighting.de/issues/",
               suffix = "",
             }
           }
