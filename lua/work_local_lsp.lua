@@ -99,6 +99,7 @@ local function config_lsp(caps, default_on_attach)
       "--compile-commands-dir="..vim.fn.getcwd().."\\obj\\windows",
     }
   })
+  CLANGD_CACHE_DIR = vim.fn.getcwd().."\\obj\\windows\\.cache\\"..'clang_nvim'
 
   vim.lsp.config('rust_analyzer', {
     capabilities = caps,

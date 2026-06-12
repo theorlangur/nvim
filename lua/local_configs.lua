@@ -18,38 +18,3 @@ vim.keymap.set('n', '<leader>sgp', live_grep_projects, { desc = '[S]earch by [G]
 vim.keymap.set('v', '<leader>svr', '"zy<ESC><cmd>exec \'Telescope live_grep cwd=resource default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection in [R]esources'})
 vim.keymap.set('v', '<leader>svs', '"zy<ESC><cmd>exec \'Telescope live_grep cwd=source default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection in [S]ources'})
 vim.keymap.set('v', '<leader>svp', '"zy<ESC><cmd>exec \'Telescope live_grep cwd=projects default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection in [P]rojects'})
-
-local restart_count = 0
-local last_restart = 0
-
-local function should_restart()
-  local now = vim.loop.now()
-  if now - last_restart > 30000 then restart_count = 0 end
-  last_restart = now
-  restart_count = restart_count + 1
-  if restart_count > 5 then
-    vim.notify('clangd crashed repeatedly; not restarting', vim.log.levels.WARN)
-    return false
-  end
-  return true
-end
-
-vim.api.nvim_create_autocmd('LspDetach', {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if not client or client.name ~= 'clangd' then return end
-
-    -- Defer so the dying client is fully gone before we restart
-    vim.defer_fn(function()
-      local cfg = vim.lsp.config['clangd']
-      if should_restart() then
-        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-          local ft = vim.bo[buf].filetype
-          if vim.api.nvim_buf_is_loaded(buf) and (ft == 'c' or ft == 'cpp' or ft == 'objc') then
-            vim.lsp.start(cfg, { bufnr = buf })
-          end
-        end
-      end
-    end, 1000)
-  end,
-})

@@ -9,6 +9,7 @@ require 'session_management'
 require 'lazycfg'
 
 require 'mycpp'
+require 'clangd_restart'
 require 'markdown'
 require 'myxml'
 require 'quickfix'
