@@ -16,5 +16,5 @@ return {
     -- "nvim-mini/mini.pick",           -- optional
     -- "folke/snacks.nvim",             -- optional
   },
-  cmd = "G",
+  cmd = "Neogit"
 }
