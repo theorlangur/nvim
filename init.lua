@@ -42,7 +42,9 @@ vim.keymap.set('n', '<leader>gb', ':Git blame<cr>', { desc = "Git Blame" })
 vim.keymap.set('n', '<leader>ghb', ':!perl tools/beautify/beautify.pl -git<cr>', { desc = "Git pre-commit beautify -git" })
 vim.keymap.set('n', '<leader>ghB', ':!perl tools/beautify/beautify.pl -git -gitcached<cr>', { desc = "Git pre-commit beautify -git cached" })
 vim.keymap.set('n', '<leader>ggp', ':!.\\tools\\generate_projects\\generate_projects.exe force<cr>', { desc = "Generate Projects" })
+vim.keymap.set('n', '<leader><leader>g', ':Neogit<cr>', { desc = "Neogit" })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
 vim.lsp.enable({'clangd', 'lua_ls', 'rust_analyzer'})
+
