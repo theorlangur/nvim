@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-vim.keymap.set('n', '<leader>gr', ':Git fetch | Git rebase origin/master<cr>', { desc = "Fetch-and-rebase" })
+vim.keymap.set('n', '<leader>gr', ':!git fetch && git rebase origin/master<cr>', { desc = "Fetch-and-rebase" })
 vim.keymap.set('n', '<leader>gcm', ':Git checkout master<cr>', { desc = "Checkout master" })
 vim.keymap.set('n', '<leader>gcd', ':Git checkout DimaExp<cr>', { desc = "Checkout DimaExp" })
 vim.keymap.set('n', '<leader>gmff', ':Git merge --ff-only DimaExp<cr>', { desc = "Merge fast-forward from DimaExp" })
