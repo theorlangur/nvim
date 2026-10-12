@@ -34,14 +34,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.keymap.set('n', '<leader>gr', ':!git fetch && git rebase origin/master<cr>', { desc = "Fetch-and-rebase" })
-vim.keymap.set('n', '<leader>gcm', ':Git checkout master<cr>', { desc = "Checkout master" })
-vim.keymap.set('n', '<leader>gcd', ':Git checkout DimaExp<cr>', { desc = "Checkout DimaExp" })
-vim.keymap.set('n', '<leader>gmff', ':Git merge --ff-only DimaExp<cr>', { desc = "Merge fast-forward from DimaExp" })
-vim.keymap.set('n', '<leader>gp', ':Git push<cr>', { desc = "Git Push" })
-vim.keymap.set('n', '<leader>gb', ':Git blame<cr>', { desc = "Git Blame" })
+vim.keymap.set('n', '<leader>gcm', ':!git checkout master<cr>', { desc = "Checkout master" })
+vim.keymap.set('n', '<leader>gcd', ':!git checkout DimaExp<cr>', { desc = "Checkout DimaExp" })
+vim.keymap.set('n', '<leader>gmff', ':!git merge --ff-only DimaExp<cr>', { desc = "Merge fast-forward from DimaExp" })
+vim.keymap.set('n', '<leader>gp', ':!git push<cr>', { desc = "Git Push" })
+vim.keymap.set('n', '<leader>gb', ':G blame<cr>', { desc = "Git Blame" })
 vim.keymap.set('n', '<leader>ghb', ':!perl tools/beautify/beautify.pl -git<cr>', { desc = "Git pre-commit beautify -git" })
 vim.keymap.set('n', '<leader>ghB', ':!perl tools/beautify/beautify.pl -git -gitcached<cr>', { desc = "Git pre-commit beautify -git cached" })
-vim.keymap.set('n', '<leader>ggp', ':!.\\tools\\generate_projects\\generate_projects.exe force<cr>', { desc = "Generate Projects" })
+vim.keymap.set('n', '<leader>ggp', ':!.\\tools\\generate_projects\\generate_projects.exe no-pch force<cr>', { desc = "Generate Projects" })
 vim.keymap.set('n', '<leader><leader>g', ':Neogit<cr>', { desc = "Neogit" })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

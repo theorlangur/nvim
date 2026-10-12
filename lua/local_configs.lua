@@ -18,3 +18,7 @@ vim.keymap.set('n', '<leader>sgp', live_grep_projects, { desc = '[S]earch by [G]
 vim.keymap.set('v', '<leader>svr', '"zy<ESC><cmd>exec \'Telescope live_grep cwd=resource default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection in [R]esources'})
 vim.keymap.set('v', '<leader>svs', '"zy<ESC><cmd>exec \'Telescope live_grep cwd=source default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection in [S]ources'})
 vim.keymap.set('v', '<leader>svp', '"zy<ESC><cmd>exec \'Telescope live_grep cwd=projects default_text=\'.escape(@z, \' \')<CR>', { desc = '[S]earch [V]isual selection in [P]rojects'})
+
+vim.keymap.set('v', '<leader>ob', ':!c:\\Work\\tools\\rust\\format-columns.exe --seps "," --exclude "1{}" --exclude "1()" --exclude "1<>" --line_start_to_ignore "//" --align "left" --fill " "<cr>')
+vim.keymap.set('v', '<leader>op', ':!c:\\Work\\tools\\rust\\format-columns.exe --seps "," --exclude "2{}" --exclude "1()" --exclude "1<>" --line_start_to_ignore "//" --align "left" --fill " "<cr>')
+
